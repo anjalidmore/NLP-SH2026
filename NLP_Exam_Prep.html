@@ -118,6 +118,33 @@ table.cov th{background:var(--accent-soft);}
 .formula-box{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);padding:10px 14px;margin:10px 0;font-size:.95rem;overflow-x:auto;}
 .diagram-box{border:1px dashed var(--border);border-radius:6px;padding:10px;margin:8px 0;background:var(--accent-soft);font-size:.85rem;}
 .weak-badge{display:inline-flex;gap:4px;}
+/* ---- Class Notes ---- */
+.nb-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:10px;}
+.nb-head h3{margin:0;font-size:1.05rem;color:var(--accent);}
+.nb-page{font-size:.7rem;color:var(--ink-soft);font-weight:700;white-space:nowrap;background:var(--accent-soft);padding:2px 8px;border-radius:20px;}
+.nb-p{margin:.5rem 0;font-size:.92rem;}
+ul.nb-list, ol.nb-list{margin:.5rem 0;padding-left:1.4rem;font-size:.92rem;}
+ul.nb-list li, ol.nb-list li{margin-bottom:.35rem;}
+.nb-formula{background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:10px 14px;margin:10px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.84rem;line-height:1.55;white-space:pre;overflow-x:auto;}
+.nb-flow{background:var(--accent-soft);border-radius:6px;padding:10px 14px;margin:10px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;line-height:1.5;white-space:pre;overflow-x:auto;}
+.nb-note{background:var(--accent-soft);border-radius:6px;padding:9px 12px;margin:10px 0;font-size:.86rem;}
+.nb-note b{color:var(--accent);}
+.nb-warn{background:rgba(193,68,14,.10);border-left:3px solid var(--couldnt);border-radius:4px;padding:9px 12px;margin:10px 0;font-size:.86rem;}
+.nb-warn b{color:var(--couldnt);}
+.nb-hi{background:rgba(184,134,11,.22);padding:0 3px;border-radius:3px;}
+.nb-scroll{overflow-x:auto;margin:10px 0;}
+table.nb-t{border-collapse:collapse;font-size:.82rem;margin:8px 0;min-width:100%;}
+table.nb-t th, table.nb-t td{border:1px solid var(--border);padding:5px 9px;text-align:left;vertical-align:top;white-space:nowrap;}
+table.nb-t th{background:var(--accent-soft);font-weight:700;}
+.nb-ex{border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin:12px 0;background:var(--panel);}
+.nb-q{font-size:.9rem;margin-bottom:8px;white-space:pre-wrap;}
+.nb-qlabel{display:inline-block;background:var(--accent);color:#fff;font-size:.68rem;font-weight:800;padding:1px 7px;border-radius:20px;margin-right:6px;vertical-align:1px;}
+.nb-a{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);font-size:.87rem;line-height:1.6;}
+.nb-a.show{display:block;}
+.nb-a .nb-t{white-space:normal;}
+pre.nb-tree{background:var(--accent-soft);border-radius:5px;padding:9px 12px;margin:8px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.78rem;line-height:1.45;white-space:pre;overflow-x:auto;}
+.pill.notes{background:#e0edf7;color:#1d4a6b;}
+@media (prefers-color-scheme: dark){ .pill.notes{background:#1e3346;color:#8fc4ea;} }
 .collapsible > .cbody{display:none;}
 .collapsible.open > .cbody{display:block;}
 .collapsible > .chead{cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
@@ -140,6 +167,7 @@ hr.sep{border:none;border-top:1px solid var(--border);margin:16px 0;}
     <div class="brand">NLP Exam Prep<small>CEPEC7032 · Modules 1–3 · 30-Mark Paper</small></div>
     <nav class="maintabs" id="mainNav">
       <button data-view="dashboard" class="active">Dashboard</button>
+      <button data-view="notes">Notes</button>
       <button data-view="m1">Module 1</button>
       <button data-view="m2">Module 2</button>
       <button data-view="m3">Module 3</button>
@@ -1816,6 +1844,838 @@ DATA.mock.push(
 /* ===== APP ENGINE ===== */
 /* ================= PROGRESS STORE ================= */
 const STORE_KEY = "nlpExamPrepProgress_v2";
+/* =========================================================
+   CLASS NOTES — transcribed from the handwritten notebook
+   ("NLP Notes.pdf", 34 scanned pages, dated 13/7/26 → 1/9/26)
+   Block types: p | list | num | formula | table | ex | note | flow | warn
+   ========================================================= */
+DATA.notes = { exam:[], m1:[], m2:[], m3:[] };
+
+/* ---------- EXAM PATTERN (notebook p.1, left page) ---------- */
+DATA.notes.exam = [
+{
+ heading:"Micro Project", page:"p.1",
+ blocks:[
+  {t:"list", v:["Group of <b>4 people</b>.","Marked by <b>viva</b> — noted in class as a <i>difficult</i> viva."]},
+  {t:"p", v:"Topic list written in the notebook (some entries faded on the scan — the legible ones are):"},
+  {t:"num", v:[
+   "Illustrate the <b>stages</b>",
+   "Illustrate the <b>ambiguities</b> in NLP — with examples",
+   "Illustrate … — with examples <i>(faded)</i>",
+   "Illustrate the <b>applications</b> — with examples",
+   "Illustrate the <b>levels</b> — with examples",
+   "Illustrate the <b>stages</b> — with examples",
+   "<b>Knowledge in LP</b> (language processing)"
+  ]},
+  {t:"note", v:"The faded items all follow the same pattern — an <i>illustrate X + example</i> question. Modules 1's Levels/Stages/Ambiguity/Applications material covers every one of them."}
+ ]
+},
+{
+ heading:"CIA-1 — 17/7 · 10 marks", page:"p.1",
+ blocks:[
+  {t:"table", head:["Marks","Question"], rows:[
+   ["4 m","Maths question — <b>TTR</b>; <b>relative frequency</b>"],
+   ["3 m","<b>Ambiguity scenarios + reason</b> (2 questions)"],
+   ["3 m","<b>Preprocessing</b> — identify the application, and in which stages it will be applied"]
+  ]}
+ ]
+},
+{
+ heading:"MSE — Paper Pattern", page:"p.1",
+ blocks:[
+  {t:"p", v:"<b>Q1 — 8 marks · answer 4 of 5 · 2 marks each · CO 1, 2, 3</b>"},
+  {t:"list", v:[
+   "a) <b>TTR</b>",
+   "b) <b>Porter stemmer</b>",
+   "c) <b>Ambiguity</b> — more than one type will be present; give the interpretation for <i>all</i> of them",
+   "d) <b>PCFG</b>",
+   "e) <b>Zipf's Law</b>"
+  ]},
+  {t:"p", v:"<b>Q2 — 12 marks · answer 3 of 4 · 4 marks each · CO 2 — Applications</b>"},
+  {t:"list", v:["Text to speech","Autocorrect","Caption reader","CV scanner"]},
+  {t:"p", v:"<b>Q3 — 10 marks · answer 2 of 3 · 5 marks each · CO 2 — the &lsquo;lengthy&rsquo; questions</b>"},
+  {t:"list", v:[
+   "a) Compute <b>perplexity</b> (bigram)",
+   "b) <b>Laplace smoothing</b> (probability)",
+   "c) <b>TF-IDF</b> — <span class='nb-hi'>don't do the whole table, do the word-specific values only</span>",
+   "a) <b>Initial &amp; transition probability</b> (POS tagging), <b>emission</b> (HMM)",
+   "b) <b>CKY</b>",
+   "c) <b>Viterbi</b> — show the state graph, give the final answer",
+   "d) <b>CFG</b> — left-most derivation + parse tree"
+  ]},
+  {t:"warn", v:"<b>Mandatory in every answer:</b> formulas · calculations shown · final answer stated · time management."}
+ ]
+}
+];
+
+/* =========================================================
+   MODULE 1 — INTRODUCTION TO NLP  (p.1–p.4, 13/7/26 – 14/7/26)
+   ========================================================= */
+DATA.notes.m1 = [
+{
+ heading:"What is NLP?", page:"p.1 · 13/7/26",
+ blocks:[
+  {t:"p", v:"<b>NLP</b> — the branch of AI that enables machines to <b>read</b>, <b>understand</b> and <b>generate</b> human language."},
+  {t:"p", v:"<b>2 components:</b>"},
+  {t:"list", v:[
+   "<b>i) NLU — Natural Language Understanding.</b> The computer tries to understand human knowledge.<br><i>Ex:</i> &ldquo;Apple launched a new phone.&rdquo; NLU should understand that <b>Apple = company, not fruit</b>.",
+   "<b>ii) NLG — Natural Language Generation.</b> The computer generates human-readable language.<br><i>Ex:</i> after understanding &ldquo;Where is my order?&rdquo;, the chatbot replies &ldquo;Your order will arrive tomorrow.&rdquo;"
+  ]}
+ ]
+},
+{
+ heading:"Generic NLP System", page:"p.1",
+ blocks:[
+  {t:"flow", v:"words ──▶ [ Parser ] ──▶ Syntactic Analysis ──▶ [ Semantic Processor ]\n                                                          │\n                                                          ▼\nMeaning Representation ──▶ [ Pragmatic & Discourse Processor ] ──▶ Meaning Representation\n                                                          │\n                                                          ▼\n[ Reasoner ] ──▶ Plan of a Response ──▶ [ Action & Response Generator ] ──▶ Output"},
+  {t:"note", v:"Note the shape: the meaning representation is produced, then <i>re-written</i> by the pragmatic/discourse stage before the reasoner ever sees it. That second &lsquo;Meaning Representation&rsquo; box is context-resolved."}
+ ]
+},
+{
+ heading:"The NLP Pipeline", page:"p.1",
+ blocks:[
+  {t:"flow", v:"Text Preprocessing ──▶ Morphological A. ──▶ Syntactic A.\n(tokenization/            (stemming/            (grammatical A.)\n normalization)            lemmatization)\n\nApplication-level A. ◀── Pragmatic A. ◀── Semantic A.\n(final task)             (context or         (meaning)\n                          intent)"}
+ ]
+},
+{
+ heading:"Stages of NLP (0. Preprocessing)", page:"p.2 · 14/7/26",
+ blocks:[
+  {t:"num", v:[
+   "<b>Text Processing &amp; word-level analysis</b> — structure &amp; formation of words (stemming, lemmatization)",
+   "<b>Syntactic analysis &amp; sequence modeling</b> — grammar + sentence structure (POS tagging, parsing)",
+   "<b>Semantic analysis &amp; word representations</b> — tries to determine the meaning of words &amp; sentences",
+   "<b>Discourse analysis</b>",
+   "<b>Pragmatics analysis</b> — context, speaker intention, world knowledge"
+  ]}
+ ]
+},
+{
+ heading:"Levels vs Stages", page:"p.2",
+ blocks:[
+  {t:"p", v:"<b>Level</b> = the <i>knowledge</i> (theory). &nbsp;&nbsp;<b>Stage</b> = <i>how to run it, in which order</i> (engineering)."},
+  {t:"table", head:["Level (theory)","Stage","Algos / Tools used"], rows:[
+   ["Phonological","1. Preprocessing","<i>left blank in notes</i>"],
+   ["Morphological","2. Morphological P.","<i>left blank in notes</i>"],
+   ["Lexical","3. Lexical / Statistical modelling","<i>left blank in notes</i>"],
+   ["Syntactic","4. Syntactic P.","<i>left blank in notes</i>"],
+   ["Semantic","5. Semantic P.","<i>left blank in notes</i>"],
+   ["Discourse + Pragmatic","6. Discourse &amp; Pragmatic P.","<i>left blank in notes</i>"],
+   ["— (application)","7. Application","<i>left blank in notes</i>"]
+  ]},
+  {t:"note", v:"The third column was left empty in the notebook. The Module 1 <b>Theory</b> tab has it filled in (Porter/FST · N-grams &amp; Laplace · Viterbi/CYK/PCFG · Lesk/Naïve-Bayes · Hobbs/Centering) — worth copying into this table before the exam."}
+ ]
+},
+{
+ heading:"Ambiguity — 1. Lexical (Morphological)", page:"p.2",
+ blocks:[
+  {t:"p", v:"Ambiguity of a <b>single word</b> — one word has multiple meanings (grammatical categories)."},
+  {t:"list", v:[
+   "<i>i)</i> &ldquo;The man leaves the <u>bank</u>.&rdquo; / &ldquo;The boat is docked at the river <u>bank</u>.&rdquo;",
+   "<i>ii)</i> &ldquo;I have a lot of <u>books</u>.&rdquo; / &ldquo;He didn't <u>book</u> the tickets like I asked.&rdquo;"
+  ]},
+  {t:"p", v:"Two sub-problems fall out of this:"},
+  {t:"list", v:[
+   "<b>⇒ Part-of-speech disambiguation</b> — specify if it's a verb, noun etc.<br><i>ex:</i> dog → noun (animal) &nbsp;|&nbsp; dog → verb (to pursue)",
+   "<b>⇒ Word-sense disambiguation</b> — needs word relationship <i>in a context</i>.<br><i>ex:</i> dog → as an animal &nbsp;|&nbsp; dog → as a very detestable person"
+  ]}
+ ]
+},
+{
+ heading:"Ambiguity — 2. Syntactic / Structural", page:"p.3",
+ blocks:[
+  {t:"p", v:"Multiple valid sentence structures (<b>parse trees</b>). <b>Solution:</b> parsing / dependency parsing."},
+  {t:"p", v:"<i>ex:</i> &ldquo;I saw the boy with a telescope.&rdquo; &nbsp;Interpretations:"},
+  {t:"num", v:["I used a telescope to see a boy.","I saw a boy who had a telescope."]}
+ ]
+},
+{
+ heading:"Ambiguity — 3. Semantic", page:"p.3",
+ blocks:[
+  {t:"p", v:"A sentence can have <b>multiple meanings even after its grammatical structure is understood</b>."},
+  {t:"list", v:[
+   "<i>i)</i> &ldquo;Visiting aunts can be a nuisance.&rdquo; → aunts who are visiting <b>or</b> us visiting aunts.",
+   "<i>ii)</i> &ldquo;I deposited money in the bank.&rdquo; → a river bank <b>or</b> a financial institution.",
+   "<i>iii)</i> &ldquo;Aman loves his mother &amp; Sam does too.&rdquo; → Sam loves Aman's mother <b>or</b> Sam loves his own mother."
+  ]}
+ ]
+},
+{
+ heading:"Ambiguity — 4. Anaphoric", page:"p.4",
+ blocks:[
+  {t:"p", v:"A phrase/word <b>refers to something previously mentioned</b>, but there is more than one possibility — multiple possible meanings of <b>he / she / it / they / him / her</b>."},
+  {t:"p", v:"<i>ex:</i> &ldquo;Ram [said] to Shyam that <u>he</u> won the competition.&rdquo; → Ram won, <b>or</b> Shyam won."}
+ ]
+},
+{
+ heading:"Ambiguity — 5. Pragmatic", page:"p.4",
+ blocks:[
+  {t:"p", v:"<b>&lt; most difficult to resolve &gt;</b> — when we have to <b>check the intention of the speaker</b>."},
+  {t:"p", v:"<i>ex:</i> &ldquo;Can you open the window?&rdquo;"},
+  {t:"list", v:[
+   "<b>literal meaning</b> — are you <i>physically able</i> to open the window?",
+   "<b>actual interpretation</b> — <i>Please</i> open the window."
+  ]}
+ ]
+},
+{
+ heading:"★ Ambiguity Solver / Identifier", page:"p.4",
+ blocks:[
+  {t:"p", v:"The professor gave this as a decision ladder — run the sentence down it in order. <b>This is the trick for the 2-mark MSE ambiguity question.</b>"},
+  {t:"table", head:["Ask yourself","Then it is"], rows:[
+   ["If one <b>WORD</b> is causing confusion","<b>Lexical</b>"],
+   ["Can the sentence have different <b>grammatical structures</b>?","<b>Syntactic</b>"],
+   ["Is the grammar clear but the overall sentence still has <b>multiple meanings</b>?","<b>Semantic</b>"],
+   ["Is there an issue in <b>he / she / it / they</b> reference?","<b>Anaphoric</b>"],
+   ["Do I need some <b>extra info</b> to understand the sentence?","<b>Pragmatic</b>"]
+  ]},
+  {t:"warn", v:"MSE Q1(c) says <b>more than one ambiguity type will be present</b> in the given sentence — so don't stop at the first match. Walk the whole ladder and give an interpretation for every type you find."}
+ ]
+},
+{
+ heading:"Challenges in NLP", page:"p.4",
+ blocks:[
+  {t:"num", v:[
+   "<b>Data &amp; availability</b> — large amounts of data from multiple sources, difficult to handle",
+   "<b>Availability of natural languages</b> — difficult",
+   "<b>Unstructured data</b>",
+   "<b>Ambiguity</b>",
+   "<b>Homophones</b>",
+   "<b>Word boundary</b>",
+   "<b>Phrase boundary</b>",
+   "<b>Part-of-speech disambiguation</b> / sense disambiguation",
+   "<b>Preposition-phrase attachment</b>",
+   "<b>Scope</b> — nouns, adjectives"
+  ]}
+ ]
+}
+];
+
+/* =========================================================
+   MODULE 2 — TEXT PROCESSING & WORD-LEVEL ANALYSIS  (p.5–p.21)
+   ========================================================= */
+DATA.notes.m2 = [
+{
+ heading:"Empirical Laws — Types &amp; Tokens", page:"p.5",
+ blocks:[
+  {t:"p", v:"If in a language the <b>same word occurs multiple times</b>, we call them the <b>same type</b>."},
+  {t:"p", v:"<i>ex:</i> &ldquo;She sells sea shells at the sea shore.&rdquo;"},
+  {t:"list", v:[
+   "<b>Tokens</b> = no. of words = <b>8</b>",
+   "<b>Type</b> = unique words &amp; which of them are repeating:<br>she:1 · sells:1 · sea:<b>2</b> · shells:1 · at:1 · the:1 · shore:1"
+  ]},
+  {t:"formula", v:"Type-Token Ratio (TTR) = types / tokens"},
+  {t:"p", v:"In the notebook the per-word values are written as TTR(she)=1/8, TTR(sells)=1/8, TTR(sea)=<b>2/8</b>, TTR(shells)=1/8, TTR(at)=1/8, TTR(the)=1/8, TTR(shore)=1/8."},
+  {t:"warn", v:"<b>Careful with wording.</b> What is computed per-word above is the <b>relative frequency</b> P(w) = count(w)/N, not TTR. <b>TTR is a property of the whole text</b> — types ÷ tokens. In this sentence: 7 types / 8 tokens = <b>0.875</b>. The CIA-1 paper asked for &ldquo;TTR <i>and</i> relative frequency&rdquo; as two separate things — keep them separate in the exam."}
+ ]
+},
+{
+ heading:"TTR — Worked Counting Examples", page:"p.5–p.6",
+ blocks:[
+  {t:"ex",
+   q:"<b>i)</b> Calculate tokens &amp; the type of every token:<br>&ldquo;The point that I am going to point out from my point of view is the point that you will definitely point from your point of view if you understand my point.&rdquo;",
+   a:"<b>Tokens: 31</b><br><br><b>Type counts:</b> The:2 · point:<b>7</b> · that:2 · I:1 · am:1 · going:1 · to:1 · from:2 · my:2 · of:2 · view:2 · is:1 · you:2 · will:1 · definitely:1 · your:1 · if:1 · understand:1"},
+  {t:"ex",
+   q:"<b>ii)</b> &ldquo;Kal mein market gaya tha aur market se sabzi khareedi, phir main ghar aaya aur ghar par khana banaya.&rdquo;<br>Calculate tokens, type(market) &amp; type(main).",
+   a:"<b>Tokens: 19</b><br>type(market) = <b>2</b><br>type(main) = <b>1</b>"},
+  {t:"ex",
+   q:"<b>iii)</b> &ldquo;Don't judge the state-of-the-art model by its size, the model's size doesn't define the model.&rdquo;<br>Calculate tokens &amp; type(model).",
+   a:"<b>Tokens: 21</b><br>type(model) = <b>2</b><br>TTR(model) = <b>2/21</b>"},
+  {t:"ex",
+   q:"&ldquo;To be or not to be, that is the question.&rdquo; — calculate tokens &amp; TTR.",
+   a:"<b>Tokens: 10</b><br>count of repeated types = 2 &nbsp;(type(to)=2, type(be)=2)<br>TTR = <b>2/10</b>"},
+  {t:"p", v:"<b>Definition as written:</b> TTR is the ratio of the no. of different words (<b>types</b>) to the no. of running words (<b>tokens</b>) in a given text of purpose."},
+  {t:"note", v:"Note on the last two: &ldquo;TTR(model) = 2/21&rdquo; and &ldquo;TTR = 2/10&rdquo; are again <i>relative frequencies of that word</i>. The whole-text TTR for &ldquo;To be or not to be, that is the question&rdquo; is 8 types / 10 tokens = 0.8."}
+ ]
+},
+{
+ heading:"Relative Frequency", page:"p.6",
+ blocks:[
+  {t:"formula", v:"P(w) = count(w) / N     where N = total no. of tokens"},
+  {t:"ex",
+   q:"&ldquo;The dog ran to the park. The dog saw a cat. The cat ran away &amp; the dog barked.&rdquo;<br>Given the word <b>dog</b>, calculate its relative frequency in the sentence given.",
+   a:"tokens = <b>19</b><br>count(dog) = <b>3</b><br><b>P(dog) = 3/19</b>"},
+  {t:"ex",
+   q:"<b>Smart Assist:</b> &ldquo;Online shopping has become increasingly popular. Many customers purchase products through mobile applications. Some customers also read product reviews before making a purchase.&rdquo;<br>Calculate tokens, types and TTR.",
+   a:"tokens = <b>37</b><br>types = <b>28</b><br><b>TTR = 28/37 ≈ 0.757</b>"}
+ ]
+},
+{
+ heading:"★ Zipf's Law &amp; Heap's Law", page:"p.7",
+ blocks:[
+  {t:"p", v:"<b>I) Zipf's Law</b>"},
+  {t:"formula", v:"f ∝ 1/r        f · r = K\n\nm ∝ 1/√r   ;   m ∝ √f        where m = no. of meanings"},
+  {t:"p", v:"<b>II) Heap's Law</b>"},
+  {t:"formula", v:"|V| = K × N^β        (β = 0.4 – 0.6)"},
+  {t:"warn", v:"Professor's margin note: &ldquo;<b>No sums about this — just know about Heap's.</b>&rdquo; So Heap's Law is a theory/definition answer only; Zipf's Law <b>is</b> examinable as a sum (MSE Q1e)."},
+  {t:"ex",
+   q:"r₁ = 20, f₁ = 1896. &nbsp;r₂ = 8, f₂ = ?",
+   a:"f ∝ 1/r  ⇒  f·r = K<br>f₁·r₁ = K → 1896 × 20 = 37920 = K<br>f₂·r₂ = K → f₂ × 8 = 37920<br><b>∴ f₂ = 4740</b>"},
+  {t:"ex",
+   q:"m<sub>r</sub> = 20 ; m<sub>E</sub> = 30. &nbsp;Find r₁ : r₂.",
+   a:"m ∝ 1/√r  ⇒  m₁/m₂ = √r₂ / √r₁<br>20/30 = √(r₂/r₁)<br>(20/30)² = r₂/r₁ → 400/900 = 4/9<br><b>∴ r₁ : r₂ = 9 : 4</b>"},
+  {t:"p", v:"<b>Also on this page:</b> a DFA example — M = ( {q₀, q₁, q₂}, {0,1}, δ, q₀, {q₁} ) with its state diagram (self-loop 0 on q₀, 1 between q₀↔q₁, q₂ reachable on 1 with a 0 self-loop)."}
+ ]
+},
+{
+ heading:"FSA vs FST", page:"p.8 · 5/8/26",
+ blocks:[
+  {t:"p", v:"<b>→ Why is FST preferable to FSA for morphological analysis?</b>"},
+  {t:"p", v:"Morphological analysis often requires a <b>mapping</b> between the surface word &amp; its morphological representation — e.g. <b>cats → cat + plural</b>."},
+  {t:"table", head:["","What it does"], rows:[
+   ["<b>FSA</b>","<b>Recognizes</b> whether a word belongs to a language."],
+   ["<b>FST</b>","<b>Represents the relationship / mapping</b> between the surface form &amp; its morphological representation."]
+  ]}
+ ]
+},
+{
+ heading:"★ Porter Stemmer — measure m", page:"p.8",
+ blocks:[
+  {t:"formula", v:"[C] [VC]^m [V]"},
+  {t:"p", v:"Write the C/V pattern of the word, collapse runs, then count how many <b>VC</b> blocks sit in the middle — that count is <b>m</b>."},
+  {t:"ex",
+   q:"Find m for <b>youthfullnesses</b>.",
+   a:"y o u t h f u l l n e s s e s<br>c v v c c &nbsp;c v c c &nbsp;c v &nbsp;c c v c<br>collapse → C V C V C V C V C<br>= C [VC]⁴<br><b>∴ m = 4</b>"},
+  {t:"ex",
+   q:"Find m for <b>pseudopseudohypoparathyroidism</b>.",
+   a:"c c v c v c &nbsp;c v v c &nbsp;v c v c v c v c v c c v c v v c v c<br>collapse → C V C V C V C V C V C V C V C V C V C V C V C<br>= C [VC]¹¹<br><b>∴ m = 11</b>"}
+ ]
+},
+{
+ heading:"★ Porter Stemmer — Step 1 Rules", page:"p.8–p.9",
+ blocks:[
+  {t:"p", v:"<b>Step 1A</b>"},
+  {t:"table", head:["Rule","Example"], rows:[
+   ["SSES → SS","caresses → caress"],
+   ["IES → I","ponies → poni"],
+   ["SS → SS","caress → caress"],
+   ["S → &nbsp;&ldquo;&nbsp;&rdquo;","cats → cat"]
+  ]},
+  {t:"p", v:"<b>Step 1B</b>"},
+  {t:"table", head:["Rule","Examples"], rows:[
+   ["(m &gt; 0) EED → EE","feed → feed &nbsp;·&nbsp; agreed → agree"],
+   ["(*v*) ED → &nbsp;&ldquo;&nbsp;&rdquo;","plastered → plaster &nbsp;·&nbsp; bled → bled"],
+   ["(*v*) ING → &nbsp;&ldquo;&nbsp;&rdquo;","motoring → motor &nbsp;·&nbsp; sing → sing"]
+  ]},
+  {t:"p", v:"<b>Step 1C</b>"},
+  {t:"table", head:["Rule","Examples"], rows:[
+   ["(*v*) Y → I","happy → happi &nbsp;·&nbsp; sky → sky"]
+  ]},
+  {t:"note", v:"Read the conditions carefully — they are what the marks are for. <b>(m&gt;0)</b> = the stem must have at least one VC block, so <i>feed</i> (m=0) keeps its EED. <b>(*v*)</b> = the stem must contain a vowel, so <i>bled</i> and <i>sing</i> and <i>sky</i> are left alone."},
+  {t:"p", v:"<b>★ Snowball Algorithm</b> — named in the notes as the successor/extension of Porter (no worked sum given in class)."}
+ ]
+},
+{
+ heading:"N-gram Language Models — Derivation", page:"p.9–p.10 · 6/8/26",
+ blocks:[
+  {t:"p", v:"<i>ex:</i> Consider S → w₁ w₂ w₃ w₄ &nbsp;&mdash;&nbsp; &ldquo;I live in Mumbai and I love to ____&rdquo;"},
+  {t:"list", v:[
+   "<b>P(W)</b> or <b>P(S)</b> = P(w₁, w₂, w₃, … wₙ) &nbsp;&mdash;(1)&nbsp; the <b>joint / sentence probability</b>",
+   "<b>P(w₄)</b> → the <b>conditional probability</b> / probability of the upcoming word"
+  ]},
+  {t:"p", v:"<b>Apply the chain rule:</b>"},
+  {t:"formula", v:"P(B|A) = P(A,B) / P(A)\n\nP(x₁, x₂, … xₙ) = P(x₁) P(x₂|x₁) P(x₃|x₁,x₂) … P(xₙ|x₁ … xₙ₋₁)\n\n⇒ P(w₁, w₂ … wₙ) = ∏ᵢ P(wᵢ | w₁, w₂, … wᵢ₋₁)     —(3)"},
+  {t:"p", v:"<b>Apply the Markov assumption on eqn (3):</b>"},
+  {t:"note", v:"<b>Markov Assumption</b> says that the probability of the next word depends <b>only on a limited no. of recent previous words</b>, not on the entire history. For that we use the <b>N-GRAM language model</b>."},
+  {t:"p", v:"<b>i) Unigram model</b>"},
+  {t:"formula", v:"P(w₁ w₂ … wₙ) ≈ ∏ᵢ P(wᵢ)          P(wᵢ) = count(wᵢ) / N(tokens)"},
+  {t:"warn", v:"Header note written across the top of the page: <b>ONLY IN UNIGRAM, WE WON'T CONSIDER THE SENTENCE BOUNDARY MARKERS &lt;s&gt; / &lt;/s&gt;.</b>"},
+  {t:"p", v:"<b>ii) Bigram model</b> — considers a <b>one-word history</b>."},
+  {t:"formula", v:"P(wᵢ | w₁, w₂ … wᵢ₋₁) ≈ P(wᵢ | wᵢ₋₁) = count(wᵢ₋₁, wᵢ) / count(wᵢ₋₁)"},
+  {t:"p", v:"<b>iii) Trigram model</b> — <b>two-word history</b>."},
+  {t:"formula", v:"P(w₃ | w₁, w₂) = c(wᵢ₋₂, wᵢ₋₁, wᵢ) / c(wᵢ₋₂, wᵢ₋₁)"},
+  {t:"p", v:"<b>iv) Four-gram model</b> — <b>three-word history</b>."},
+  {t:"formula", v:"P(w₄ | w₁, w₂, w₃)"},
+  {t:"warn", v:"Margin note (11/8): <b>No numericals on tri- &amp; four-gram.</b> Know the formulas and the &lsquo;most probable next word&rsquo; reasoning, but the calculation-heavy sums will be bigram."}
+ ]
+},
+{
+ heading:"N-gram — Worked Sums", page:"p.10–p.11",
+ blocks:[
+  {t:"ex",
+   q:"<b>Corpus:</b> &lt;s&gt; I like NLP &lt;/s&gt; · &lt;s&gt; I like Blockchain &lt;/s&gt; · &lt;s&gt; Sam likes NLP &lt;/s&gt;<br><b>i)</b> Calculate the unigram probability of the given words.",
+   a:"<b>Step 1 — frequency table</b><br>I:2 · like:2 · NLP:2 · Blockchain:1 · Sam:1 · likes:1<br>&lt;s&gt;:3 · &lt;/s&gt;:3 &nbsp;<i>(sentence boundary markers — <b>not used here</b>)</i><br><b>tokens N = 9</b><br><br><b>Step 2 — P(wᵢ) = c(wᵢ)/N</b><br>P(I) = 2/9 · P(like) = 2/9 · P(NLP) = 2/9<br>P(Blockchain) = 1/9 · P(Sam) = 1/9 · P(likes) = 1/9"},
+  {t:"ex",
+   q:"<b>ii)</b> Calculate the sentence probability of &lsquo;I like NLP&rsquo; (unigram).",
+   a:"P(S) = ∏ P(wᵢ) = P(I) × P(like) × P(NLP)<br>= 2/9 × 2/9 × 2/9 = <b>8/729 ≈ 0.011</b>"},
+  {t:"ex",
+   q:"Calculate the <b>bigram</b> probability of &lt;s&gt; I like NLP &lt;/s&gt; on the same corpus.",
+   a:"w₁: P(I | &lt;s&gt;) = c(&lt;s&gt;, I)/c(&lt;s&gt;) = <b>2/3</b><br>w₂: P(like | I) = c(I, like)/c(I) = 2/2 = <b>1</b><br>w₃: P(NLP | like) = c(like, NLP)/c(like) = <b>1/2</b><br>w₄: P(&lt;/s&gt; | NLP) = c(NLP, &lt;/s&gt;)/c(NLP) = 2/2 = <b>1</b><br><br>P(sentence) = 2/3 × 1 × 1/2 × 1 = <b>1/3 ≈ 0.33</b>"}
+ ]
+},
+{
+ heading:"Most Probable Next Word", page:"p.11–p.12",
+ blocks:[
+  {t:"p", v:"<b>Q.</b> What is the most probable next word predicted by the model from the following word sequences?"},
+  {t:"p", v:"<b>Corpus (7 sentences):</b><br>&lt;s&gt; I am Henry &lt;/s&gt;<br>&lt;s&gt; I like college &lt;/s&gt;<br>&lt;s&gt; Do Henry like college &lt;/s&gt;<br>&lt;s&gt; Henry I am &lt;/s&gt;<br>&lt;s&gt; Do I like Henry &lt;/s&gt;<br>&lt;s&gt; Do I like college &lt;/s&gt;<br>&lt;s&gt; I do like college &lt;/s&gt;"},
+  {t:"p", v:"<b>Frequency table</b> — I:6 · am:2 · Henry:5 · like:5 · college:3 · Do:4 · &lt;s&gt;:7 · &lt;/s&gt;:7 &nbsp;·&nbsp; <b>tokens = 39</b>"},
+  {t:"ex",
+   q:"<b>i)</b> &ldquo;Do ___ ?&rdquo; &nbsp;<i>(bigram)</i>",
+   a:"P(Henry | Do) = c(Do,Henry)/c(Do) = 1/4 = 0.25<br>P(I | Do) = c(Do,I)/c(Do) = 2/4 = <b>0.5</b><br>P(like | Do) = c(Do,like)/c(Do) = 1/4 = 0.25<br><br><b>∴ &lsquo;I&rsquo; is the most probable word to come after &lsquo;Do&rsquo;.</b>"},
+  {t:"ex",
+   q:"<b>ii)</b> &ldquo;&lt;s&gt; I like Henry ___ ?&rdquo; &nbsp;<i>(bigram)</i>",
+   a:"P(&lt;/s&gt; | Henry) = c(Henry, &lt;/s&gt;)/c(Henry) = <b>3/5</b><br>P(like | Henry) = 1/5<br>P(I | Henry) = 1/5<br><br><b>∴ &lt;/s&gt; is the most probable word</b> (the sentence ends)."},
+  {t:"ex",
+   q:"<b>iii)</b> &ldquo;&lt;s&gt; Do I like ___ ?&rdquo; &nbsp;<i>(trigram)</i>",
+   a:"P(wᵢ | wᵢ₋₂, wᵢ₋₁) = c(wᵢ₋₂, wᵢ₋₁, wᵢ) / c(wᵢ₋₂, wᵢ₋₁)<br>c(I, like) = 3<br>P(college | I, like) = c(I, like, college)/c(I, like) = <b>2/3</b><br>P(Henry | I, like) = c(I, like, Henry)/c(I, like) = 1/3<br><br><b>∴ &lsquo;college&rsquo; is the most probable word.</b>"},
+  {t:"ex",
+   q:"<b>iv)</b> &ldquo;&lt;s&gt; Do I like college ___ ?&rdquo; &nbsp;<i>(four-gram)</i>",
+   a:"P(wᵢ | wᵢ₋₃, wᵢ₋₂, wᵢ₋₁) = c(wᵢ₋₃, wᵢ₋₂, wᵢ₋₁, wᵢ) / c(wᵢ₋₃, wᵢ₋₂, wᵢ₋₁)<br>P(&lt;/s&gt; | Do, I, like, college) = c(Do, I, like, college, &lt;/s&gt;) / c(Do, I, like, college) = <b>1</b>"}
+ ]
+},
+{
+ heading:"Comparing Sentence Probabilities", page:"p.12–p.13",
+ blocks:[
+  {t:"ex",
+   q:"Which of the following sentences gets the higher probability using <b>bigram</b>?<br>S₁ = &lt;s&gt; I like college &lt;/s&gt;<br>S₂ = &lt;s&gt; Do I like Henry &lt;/s&gt;<br><i>(scored against the 7-sentence Henry/college corpus above)</i>",
+   a:"<b>(i)</b> P(S₁) = P(I|&lt;s&gt;) × P(like|I) × P(college|like) × P(&lt;/s&gt;|college)<br>= 3/7 × 3/6 × 3/5 × 3/3<br>= 3/7 × 1/2 × 3/5 × 1<br><b>P(S₁) = 0.13</b><br><br><b>(ii)</b> P(S₂) = P(Do|&lt;s&gt;) × P(I|Do) × P(like|I) × P(Henry|like) × P(&lt;/s&gt;|Henry)<br>= 3/7 × 2/4 × 3/6 × 2/5 × 3/5<br><b>P(S₂) = 0.0257</b><br><br><b>∴ The first statement has the highest probability.</b>"},
+  {t:"note", v:"A smaller 11-token frequency table (&lt;s&gt;:2 · &lt;/s&gt;:2 · I:2 · like:2 · college:1 · Do:1 · Henry:1) is also written in the notebook for this question — the solved version uses the full 7-sentence corpus counts."}
+ ]
+},
+{
+ heading:"Zero Probability Problem &amp; Laplace Smoothing", page:"p.13",
+ blocks:[
+  {t:"p", v:"<b># Zero probability problem</b> — if a sentence contains a zero-probability word / N-gram, its <b>entire sentence probability becomes zero</b>."},
+  {t:"p", v:"<b>Smoothing</b> is required when we need to prevent zero probabilities for unseen words / N-grams."},
+  {t:"p", v:"<b>⇒ Solution: Smoothing techniques</b>"},
+  {t:"p", v:"<b>i) Laplace Smoothing / Add-one smoothing</b> — adds 1 to every n-gram count to avoid zero probability."},
+  {t:"formula", v:"unigram :   P(w | class) = ( c(w) + 1 ) / ( N + |V| )\n\nbigram  :   P(wᵢ | wᵢ₋₁) = ( c(wᵢ₋₁, wᵢ) + 1 ) / ( c(wᵢ₋₁) + |V| )\n\nc  → count        |V| → vocabulary size / types        N → tokens"},
+  {t:"note", v:"Margin notes: the <b>unigram</b> form is used &ldquo;when we want to segregate words&rdquo; (classification — Naïve Bayes); the <b>bigram</b> form is used for &ldquo;calculating the probability of sentences&rdquo;."}
+ ]
+},
+{
+ heading:"Laplace Smoothing — Worked Sums", page:"p.14",
+ blocks:[
+  {t:"ex",
+   q:"For the given corpus compute the smoothed probability of the test sentence.<br><b>Corpus:</b> &lt;s&gt; I am Sam &lt;/s&gt; · &lt;s&gt; Sam I am &lt;/s&gt; · &lt;s&gt; I do not like Sam &lt;/s&gt;<br><b>Test sentence:</b> &lt;s&gt; I am Sam &lt;/s&gt;",
+   a:"<b>Word | Freq:</b> &lt;s&gt;:3 · &lt;/s&gt;:3 · I:3 · am:2 · Sam:3 &nbsp;&nbsp;<b>V = types = 6</b><br><br>P(wᵢ|wᵢ₋₁) = ( c(wᵢ₋₁,wᵢ) + 1 ) / ( c(wᵢ₋₁) + V )<br><br>P(I | &lt;s&gt;) = (2+1)/(3+6) = 3/9 = <b>1/3</b><br>P(am | I) = (2+1)/(3+6) = 3/9 = <b>1/3</b><br>P(Sam | am) = (1+1)/(2+6) = 2/8 = <b>1/4</b><br>P(&lt;/s&gt; | Sam) = (2+1)/(3+6) = 3/9 = <b>1/3</b><br><br>P(S) = 1/3 × 1/3 × 1/4 × 1/3 <b>≈ 0.009</b>"},
+  {t:"ex",
+   q:"For the given corpus compute the smoothed probability of:<br>i) P(here|I) &nbsp; ii) P(it|I) &nbsp; iii) P(happy|I) &nbsp; iv) P(I|I)<br><b>Corpus:</b> &lt;s&gt; I am here &lt;/s&gt; · &lt;s&gt; I like it &lt;/s&gt; · &lt;s&gt; I am happy &lt;/s&gt;",
+   a:"<b>Word | Freq:</b> &lt;s&gt;:3 · &lt;/s&gt;:3 · I:3 · am:2 · here:1 · like:1 · it:1 · happy:1<br><b>V = 6, N = 9</b><br><i>Margin note: since the class is not mentioned, we use <b>bigram</b>.</i><br><br>P(wᵢ|wᵢ₋₁) = ( c(wᵢ₋₁,wᵢ) + 1 ) / ( c(wᵢ₋₁) + V )<br><br>P(here | I) = (0+1)/(3+6) = <b>1/9</b><br>P(it | I) = (0+1)/(3+6) = <b>1/9</b><br>P(happy | I) = (0+1)/(3+6) = <b>1/9</b><br>P(I | I) = (0+1)/(3+6) = <b>1/9</b>"},
+  {t:"note", v:"The notebook first tried the <b>unigram</b> form here — P(here|I) = (1+1)/(9+6) = 2/15 — then struck it out and redid it with the <b>bigram</b> form. The bigram answer (1/9) is the one to reproduce: the question asks for P(here | I), a conditional on a previous word, so the bigram formula is the correct one."}
+ ]
+},
+{
+ heading:"Naïve Bayes Classification", page:"p.15",
+ blocks:[
+  {t:"formula", v:"P(w | class) = ( c(w) + 1 ) / ( N + V )\n\nP(document | class) = ∏ P(wᵢ | class)"},
+  {t:"ex",
+   q:"<b>Naïve Bayes Spam Filter.</b> Vocabulary size = 8. Test if the given email is spam / ham.<br><br><b>Word | Count in SPAM:</b> Free:6 · Money:5 · Win:4 · Click:3 · Prize:2 · Meeting:0 · Project:0 · Launch:0 &nbsp;&nbsp;<b>Total tokens = 20</b><br><br><b>Test email:</b> &lsquo;win free money meeting&rsquo;",
+   a:"<b>V = 8, N = 20</b><br>P(w | class) = ( c(w)+1 ) / ( N+V )<br><br>P(win | SPAM) = (4+1)/(8+20) = <b>5/28</b><br>P(free | SPAM) = (6+1)/(8+20) = 7/28 = <b>1/4</b><br>P(money | SPAM) = (5+1)/(8+20) = <b>6/28</b><br>P(meeting | SPAM) = (0+1)/28 = <b>1/28</b><br><br>P(email | SPAM) = 5/28 × 7/28 × 6/28 × 1/28<br><b>= 3.42 × 10⁻⁴</b>"},
+  {t:"note", v:"Notice &lsquo;meeting&rsquo; has count 0 in SPAM — without add-1 smoothing the whole product would collapse to zero. That is exactly the zero-probability problem this technique exists to fix, and it's worth writing that sentence in the answer."},
+  {t:"ex",
+   q:"<b>Sentiment Analysis of a Product Review.</b> Classify a review as POSITIVE or NEGATIVE using Naïve Bayes. N = 25, V = 10.<br><br><b>Word | Count in POSITIVE:</b> great:8 · love:6 · excellent:5 · perfect:4 · amazing:2 · terrible:0 · refund:0 · broken:0<br><br><b>Test sentence:</b> &lsquo;product broken, please refund.&rsquo;",
+   a:"<b>Left unsolved in the notebook</b> — it is set up as practice. Worked through with the same method:<br><br>P(w | POS) = ( c(w)+1 ) / ( N+V ) = ( c(w)+1 ) / 35<br><br>P(broken | POS) = (0+1)/35 = <b>1/35</b><br>P(refund | POS) = (0+1)/35 = <b>1/35</b><br>P(product | POS) = (0+1)/35 = <b>1/35</b> &nbsp;<i>(unseen)</i><br>P(please | POS) = (0+1)/35 = <b>1/35</b> &nbsp;<i>(unseen)</i><br><br>P(review | POS) = (1/35)⁴ = 1/1,500,625 <b>≈ 6.66 × 10⁻⁷</b><br><br>Every content word of the review is unseen in the POSITIVE class, so the POSITIVE likelihood is at its floor value. The NEGATIVE class table would give &lsquo;broken&rsquo; and &lsquo;refund&rsquo; non-zero counts and therefore a much larger product — <b>∴ classify as NEGATIVE</b>.<br><br><i>This one is in your Numericals tab as a question to attempt yourself.</i>"}
+ ]
+},
+{
+ heading:"Good-Turing Smoothing", page:"p.16 · 13/8",
+ blocks:[
+  {t:"num", v:[
+   "<b>Good-Turing smoothed probability</b> for an observed n-gram:"
+  ]},
+  {t:"formula", v:"P*_GT = c* / N"},
+  {t:"num", v:["<b>Probability mass for unseen words:</b>"]},
+  {t:"formula", v:"P*_GT(0) = N₁ / N\n\nN₁ → frequency of words occurring once\nN  → total words"},
+  {t:"num", v:["<b>Adjusted count / Good-Turing count:</b>"]},
+  {t:"formula", v:"c* = ( c + 1 ) × N_{c+1} / N_c"},
+  {t:"num", v:["<b>Frequency-of-frequencies (N_c) table</b> — N_c = the number of distinct items that occur exactly c times."]}
+ ]
+},
+{
+ heading:"Good-Turing — Unigram Sum", page:"p.16–p.17",
+ blocks:[
+  {t:"ex",
+   q:"Construct the frequency-of-frequencies (N_c) table for c = 1, 2, 3, 4. Calculate the total probability mass assigned to unseen words. Calculate the Good-Turing smoothed probability of the word <b>&lsquo;cat&rsquo;</b>.<br><br><b>Training corpus (unigram):</b> the:4 · cat:3 · dog:3 · runs:2 · sits:2 · red:1 · blue:1 · big:1 · small:1 · house:1 · car:1 &nbsp;&nbsp;<b>N = 20</b>",
+   a:"<b>a) Frequency-of-frequencies table</b><br><br><table class='nb-t'><tr><th>Occurrence</th><th>Words</th><th>N_c</th></tr><tr><td>1 time</td><td>red, blue, big, small, house, car</td><td><b>6</b></td></tr><tr><td>2 times</td><td>runs, sits</td><td><b>2</b></td></tr><tr><td>3 times</td><td>cat, dog</td><td><b>2</b></td></tr><tr><td>4 times</td><td>the</td><td><b>1</b></td></tr></table><br>So N₁ = 6, N₂ = 2, N₃ = 2, N₄ = 1<br><br><b>b) Probability of unseen words</b><br>P*_GT(0) = N₁/N = 6/20 = <b>0.30</b><br>⇒ <b>30% of the probability mass is assigned to unseen words.</b><br><br><b>c) GT probability for &lsquo;cat&rsquo;</b> &nbsp;(count = 3)<br>c* = (c+1) × N_{c+1}/N_c = (3+1) × N₄/N₃ = 4 × (1/2) = <b>2</b><br>P(cat) = c*/N = 2/20 = <b>0.1</b>"},
+  {t:"note", v:"Notice the discount: &lsquo;cat&rsquo; was <i>seen</i> 3 times but is charged as if seen only 2. The 1 count taken off each seen word is what funds the 30% reserved for words the model has never seen."}
+ ]
+},
+{
+ heading:"Good-Turing — Bigram Sum", page:"p.17–p.18",
+ blocks:[
+  {t:"ex",
+   q:"Construct the frequency-of-frequencies table. Calculate the total probability mass assigned to unseen <b>bigrams</b>. Calculate the Good-Turing smoothing probability of <b>&lsquo;I want&rsquo;</b>.<br><br><b>Training corpus:</b> I like:4 · I love:3 · I want:2 · I need:2 · I play:1 · I watch:1 · I read:1 · I study:1 &nbsp;&nbsp;<b>N = 15</b>",
+   a:"<b>a) N_c table</b><br><br><table class='nb-t'><tr><th>Occurrence</th><th>Bigrams</th><th>N_c</th></tr><tr><td>1 time</td><td>I play, I watch, I read, I study</td><td><b>4</b></td></tr><tr><td>2 times</td><td>I want, I need</td><td><b>2</b></td></tr><tr><td>3 times</td><td>I love</td><td><b>1</b></td></tr><tr><td>4 times</td><td>I like</td><td><b>1</b></td></tr></table><br>So N₁ = 4, N₂ = 2, N₃ = 1, N₄ = 1<br><br><b>b) GT probability of unseen bigrams</b><br>P*_GT(0) = N₁/N = 4/15 = <b>0.267</b><br>⇒ Approx <b>26.7%</b> of the probability mass is reserved for unseen bigrams.<br><br><b>c) GT probability for &lsquo;I want&rsquo;</b> &nbsp;(count = 2)<br>c* = (c+1) × N_{c+1}/N_c = 3 × N₃/N₂ = 3 × (1/2) = <b>1.5</b><br>P(want | I) = c*/N = 1.5/15 = <b>0.1</b><br><i>(unsmoothed, for comparison: P = 2/15 ≈ 0.133)</i>"},
+  {t:"warn", v:"<b>Copying slip in the notebook.</b> The N_c column was written as N₃ = 3 and N₄ = 4 — those are the <i>occurrence counts</i>, not the number of bigrams. Only <b>one</b> bigram occurs 3 times (I love) and <b>one</b> occurs 4 times (I like), so <b>N₃ = 1 and N₄ = 1</b>. The notebook's own final answer confirms it: c* = 3 × (1/2) = 1.5 only works with N₃ = 1. Use N₃ = N₄ = 1."}
+ ]
+},
+{
+ heading:"Evaluating a Language Model — Perplexity", page:"p.18",
+ blocks:[
+  {t:"table", head:["i) Extrinsic","ii) Intrinsic evaluation"], rows:[
+   ["Evaluate by plugging the LM into a real downstream task.","<b>Perplexity</b> &mdash; <b>lower perplexity ⇒ better model</b>."]
+  ]},
+  {t:"formula", v:"For a test set W = w₁ w₂ … w_N :\n\nPP(W) = P(w₁ w₂ … w_N) ^ (−1/N)\n\n      = ᴺ√( 1 / P(w₁ w₂ … w_N) )\n\nN = number of words in the test sentence"}
+ ]
+},
+{
+ heading:"Perplexity — Worked Sums", page:"p.18–p.19",
+ blocks:[
+  {t:"ex",
+   q:"Compute the perplexity of the sentence <b>&ldquo;She likes mangoes&rdquo;</b> using a <b>bigram</b> model.<br><br><b>Corpus:</b> She likes apples. She likes bananas. He likes mangoes. They eat fruits. She likes grapes.",
+   a:"<b>Step 1 — write the corpus with sentence boundaries</b><br>&lt;s&gt; She likes apples &lt;/s&gt;<br>&lt;s&gt; She likes banana &lt;/s&gt;<br>&lt;s&gt; He likes mangoes &lt;/s&gt;<br>&lt;s&gt; They eat fruits &lt;/s&gt;<br>&lt;s&gt; She likes grapes &lt;/s&gt;<br><br><b>Step 2 — list the bigrams in the test sentence</b><br>[&lt;s&gt;, she] · [she, likes] · [likes, mangoes] · [mangoes, &lt;/s&gt;]<br><br><b>Step 3 — compute the bigram probabilities</b><br>P(she | &lt;s&gt;) = c(&lt;s&gt;, she)/c(&lt;s&gt;) = <b>3/5</b><br>P(likes | she) = c(she, likes)/c(she) = 3/3 = <b>1</b><br>P(mangoes | likes) = c(likes, mangoes)/c(likes) = <b>1/4</b><br>P(&lt;/s&gt; | mangoes) = c(mangoes, &lt;/s&gt;)/c(mangoes) = 1/1 = <b>1</b><br><br>P(W) = 3/5 × 1 × 1/4 × 1 = <b>3/20</b><br><br><b>Step 4 — compute perplexity</b> &nbsp;(N = 3, the no. of words in the test sentence)<br>PP(W) = ᴺ√( 1/P(W) ) = ³√( 1 / (3/20) ) = ³√( 20/3 )<br><br><b>PP(W) = 1.8821</b>"},
+  {t:"ex",
+   q:"Two <b>unigram</b> models score the sentence &lsquo;The patient feels very weak&rsquo;:<br>P_A(W) = 0.00008 &nbsp;;&nbsp; P_B(W) = 0.00002 &nbsp;;&nbsp; N = 5<br>a) Calculate the perplexity of Model A.",
+   a:"PP_A(W) = ᴺ√( 1 / P_A(W) ) = ⁵√( 1 / 0.00008 ) = ⁵√12500<br><br><b>PP_A(W) = 6.5975</b><br><br><i>Model B: PP_B = ⁵√(1/0.00002) = ⁵√50000 ≈ 8.706 — higher, so <b>Model A is the better model</b>.</i>"},
+  {t:"note", v:"Closing remark in the notes: <b>unigram is not good enough, since it takes no word history. So bigram would be better for these types of questions.</b>"}
+ ]
+},
+{
+ heading:"Statistical Text Representation — Bag of Words", page:"p.20",
+ blocks:[
+  {t:"p", v:"<b>Bag of Words (BoW)</b> — represents sentences in different forms of <b>vectors</b>."},
+  {t:"ex",
+   q:"Create the vocabulary and the BoW vectors.<br>D₁: I love NLP<br>D₂: I love machine learning",
+   a:"<b>Step 1 — create the vocabulary</b><br>[ I, love, NLP, machine, learning ]<br><br><b>Step 2 — count per document</b><br><table class='nb-t'><tr><th>DOC</th><th>I</th><th>love</th><th>NLP</th><th>machine</th><th>learning</th></tr><tr><td>D₁</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>D₂</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr></table><br><b>D₁ = [1, 1, 1, 0, 0]</b><br><b>D₂ = [1, 1, 0, 1, 1]</b> &nbsp;← BoW"}
+ ]
+},
+{
+ heading:"TF-IDF", page:"p.20–p.21",
+ blocks:[
+  {t:"p", v:"<b>TF-IDF</b> — assigns a numerical <b>weight</b> to a word based on how frequently the word occurs in a particular document."},
+  {t:"formula", v:"TF  = no. of occurrences of the word in the doc / total no. of words in the doc\n\nIDF = log ( total no. of sentences / no. of sentences containing the word )\n\nTF-IDF = TF × IDF"},
+  {t:"ex",
+   q:"Compute TF-IDF for the given corpus.<br>D₁: I love NLP<br>D₂: I love machine learning<br>D₃: NLP is useful",
+   a:"<b>I) TF</b><br><table class='nb-t'><tr><th>D₁: I love NLP</th><th>D₂: I love ML</th><th>D₃: NLP is useful</th></tr><tr><td>I → 1/3<br>love → 1/3<br>NLP → 1/3</td><td>I → 1/4<br>love → 1/4<br>machine → 1/4<br>learning → 1/4</td><td>NLP → 1/3<br>is → 1/3<br>useful → 1/3</td></tr></table><br><b>II) IDF</b><br><table class='nb-t'><tr><th>word</th><th>doc count</th><th>IDF</th></tr><tr><td>I</td><td>2</td><td>log(3/2) = <b>0.1761</b></td></tr><tr><td>love</td><td>2</td><td>log(3/2) = <b>0.1761</b></td></tr><tr><td>NLP</td><td>2</td><td>log(3/2) = <b>0.1761</b></td></tr><tr><td>machine</td><td>1</td><td>log(3/1) = <b>0.4771</b></td></tr><tr><td>learning</td><td>1</td><td>log(3/1) = <b>0.4771</b></td></tr><tr><td>is</td><td>1</td><td>log(3/1) = <b>0.4771</b></td></tr><tr><td>useful</td><td>1</td><td>log(3/1) = <b>0.4771</b></td></tr></table><br><b>III) TF-IDF = TF × IDF</b><br><br><b>D₁:</b> I → 1/3 × 0.1761 = 0.0587 · love → 0.0587 · NLP → 0.0587<br>&nbsp;&nbsp;&nbsp;<b>TF-IDF_D₁ = [ 0.0587, 0.0587, 0.0587 ]</b><br><br><b>D₂:</b> I → 1/4 × 0.1761 = 0.044 · love → 0.044 · machine → 1/4 × 0.4771 = 0.1193 · learning → 0.1193<br>&nbsp;&nbsp;&nbsp;<b>TF-IDF_D₂ = [ 0.044, 0.044, 0.1193, 0.1193 ]</b><br><br><b>D₃:</b> NLP → 1/3 × 0.1761 = 0.0587 · is → 1/3 × 0.4771 = 0.1590 · useful → 0.1590<br>&nbsp;&nbsp;&nbsp;<b>TF-IDF_D₃ = [ 0.0587, 0.1590, 0.1590 ]</b>"},
+  {t:"warn", v:"Remember the MSE instruction from p.1: for TF-IDF, <b>don't compute the whole table — do the word-specific values only</b>. Read which word(s) the question names and compute just those."},
+  {t:"note", v:"IDF here uses <b>log base 10</b> (log₁₀(3/2)=0.1761, log₁₀(3)=0.4771). If you use ln you'll get 0.405 / 1.099 instead — state your base."}
+ ]
+}
+];
+
+/* =========================================================
+   MODULE 3 — SYNTAX ANALYSIS & SEQUENCE MODELLING (p.22–p.34)
+   ========================================================= */
+DATA.notes.m3 = [
+{
+ heading:"Syntax Analysis &amp; POS Tagging", page:"p.22 · 25/8",
+ blocks:[
+  {t:"p", v:"<b>★ Syntax Analysis</b> — the <b>3rd phase</b> of NLP."},
+  {t:"p", v:"<b>→ POS tagging (Part of Speech):</b> it is a process that attaches each word in a sentence with a tag."}
+ ]
+},
+{
+ heading:"★ HMM for POS Tagging — Full Derivation", page:"p.23",
+ blocks:[
+  {t:"p", v:"W = w₁, w₂, w₃, … w<sub>N</sub> → the <b>words</b> in the corpus (<b>observed</b>)<br>T = t₁, t₂, t₃, … t<sub>N</sub> → the corresponding <b>tags</b> (<b>unknown</b>)"},
+  {t:"flow", v:"ex:    I      love    pizza\n       w₁      w₂      w₃\n       ↓       ↓       ↓\n       t₁      t₂      t₃\n     [ PR  ·  VB  ·  NN ]"},
+  {t:"p", v:"To find the unambiguous tag sequence given the word sequence, we have to find <b>T̂</b> (or T*) which is the <b>most probable tag sequence</b>. It is found from the argmax of the probability of T given W — i.e. among all the possible sequences of POS tags that the word sequence can take, the one with the max probability."},
+  {t:"formula", v:"T̂ = argmax_T  P(T | W)        —(1)"},
+  {t:"p", v:"<b>Apply Bayes' theorem</b> of conditional probability on eqn (1): &nbsp; P(x|y) = P(y|x)·P(x) / P(y)"},
+  {t:"formula", v:"T̂ = argmax_T  P(W|T) P(T) / P(W)\n\nrewritten for n words:\n\nt̂₁ⁿ = argmax_{t₁ⁿ}  P(w₁ⁿ | t₁ⁿ) P(t₁ⁿ) / P(w₁ⁿ)        —(II)"},
+  {t:"p", v:"<b>Simplify eqn (II) by dropping the denominator P(w₁ⁿ)</b> — because the set of words will be the same for all candidate tag sequences."},
+  {t:"formula", v:"t̂₁ⁿ = argmax_{t₁ⁿ}  P(w₁ⁿ | t₁ⁿ) · P(t₁ⁿ)        —(III)\n                     └──────┬──────┘   └───┬───┘\n                        likelihood        prior prob\n                   (prob of the word     of the tag\n                    sequence for a        sequence\n                    given tag sequence)"},
+  {t:"p", v:"<b>Apply the chain rule</b> on the prior P(t₁ⁿ):"},
+  {t:"formula", v:"P(t₁ⁿ) = P(t₁) P(t₂|t₁) P(t₃|t₁t₂) … P(tₙ | t₁, t₂ … tₙ₋₁)        —(IV)"},
+  {t:"p", v:"<b>Apply Markov's assumption</b> on eqn (IV):"},
+  {t:"formula", v:"P(t₁ⁿ) = P(t₁) P(t₂|t₁) P(t₃|t₂) … P(tₙ|tₙ₋₁)\n\n       = ∏ᵢ₌₁ⁿ P(tᵢ | tᵢ₋₁)        —(V)   { Bigram Assumption }"},
+  {t:"p", v:"<b>Apply the chain rule</b> on the likelihood P(w₁ⁿ | t₁ⁿ) from eqn (III):"},
+  {t:"formula", v:"P(w₁ⁿ|t₁ⁿ) = P(w₁|t₁…tₙ) P(w₂|w₁,t₁…tₙ) … P(wₙ|w₁…wₙ₋₁, t₁…tₙ)   —(VI)"},
+  {t:"p", v:"<b>Apply Markov's assumption</b> on eqn (VI):"},
+  {t:"formula", v:"P(w₁ⁿ | t₁ⁿ) = ∏ᵢ₌₁ⁿ P(wᵢ | tᵢ)        —(VII)  { Lexical Prob. assumption }"},
+  {t:"p", v:"<b>Substitute (V) &amp; (VII) into (III):</b>"},
+  {t:"formula", v:"t̂₁ⁿ = argmax_{t₁ⁿ}  ∏ᵢ₌₁ⁿ  P(wᵢ | tᵢ) · P(tᵢ | tᵢ₋₁)\n                            └────┬────┘   └─────┬─────┘\n                            Emission prob   State transition prob"},
+  {t:"formula", v:"P(wᵢ | tᵢ)   = c(tᵢ, wᵢ) / c(tᵢ)\n\nP(tᵢ | tᵢ₋₁) = c(tᵢ₋₁, tᵢ) / c(tᵢ₋₁)"},
+  {t:"warn", v:"This whole derivation is a standing 5-mark answer. The examiner is looking for the numbered chain: <b>(1) argmax P(T|W) → Bayes → (III) drop P(W) → chain rule → Markov → emission × transition</b>. Label your equations exactly like this."}
+ ]
+},
+{
+ heading:"Emission &amp; Transition Matrices — Worked Sum", page:"p.24–p.25",
+ blocks:[
+  {t:"ex",
+   q:"Calculate the emission &amp; transition probabilities for the given corpus (<b>Bigram HMM</b>):<br><br>&lt;s&gt; Book/V a/DET car/N &lt;/s&gt;<br>&lt;s&gt; Park/V the/DET car/N &lt;/s&gt;<br>&lt;s&gt; The/DET book/N is/V in/Prep the/DET car/N &lt;/s&gt;<br>&lt;s&gt; The/DET car/N is/V in/Prep a/DET park/N &lt;/s&gt;",
+   a:"<b>Step 1 — word frequency table</b><br>Book:2 · a:2 · car:4 · Park:2 · the:4 · is:2 · in:2<br><br><b>Step 2 — emission probability matrix</b> &nbsp;P(word | tag)<br><table class='nb-t'><tr><th></th><th>V (4)</th><th>Det (6)</th><th>N (6)</th><th>Prep (2)</th></tr><tr><td>Book</td><td>1/4</td><td>0</td><td>1/6</td><td>0</td></tr><tr><td>a</td><td>0</td><td>2/6</td><td>0</td><td>0</td></tr><tr><td>car</td><td>0</td><td>0</td><td>4/6</td><td>0</td></tr><tr><td>park</td><td>1/4</td><td>0</td><td>1/6</td><td>0</td></tr><tr><td>is</td><td>2/4</td><td>0</td><td>0</td><td>0</td></tr><tr><td>in</td><td>0</td><td>0</td><td>0</td><td>2/2 = 1</td></tr><tr><td>the</td><td>0</td><td>4/6</td><td>0</td><td>0</td></tr></table><br><b>Step 3 — state transition probability matrix</b> &nbsp;P(tag | previous tag)<br><table class='nb-t'><tr><th></th><th>N</th><th>V</th><th>DET</th><th>Prep</th><th>&lt;/s&gt;</th></tr><tr><td>&lt;s&gt; (4)</td><td>0</td><td>2/4</td><td>2/4</td><td>0</td><td>0</td></tr><tr><td>N (6)</td><td>0</td><td>2/6</td><td>0</td><td>0</td><td>4/6</td></tr><tr><td>V (4)</td><td>0</td><td>0</td><td>2/4</td><td>2/4</td><td>0</td></tr><tr><td>Det (6)</td><td>4/6</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Prep (2)</td><td>0</td><td>0</td><td>2/2 = 1</td><td>0</td><td>0</td></tr></table>"},
+  {t:"note", v:"Header note on p.25: <b>an HMM provides three things — 1st the emission probabilities, 2nd the state transition probabilities, 3rd the initial probability matrix (IPM).</b> Name all three when you define an HMM."}
+ ]
+},
+{
+ heading:"HMM Table Generation", page:"p.25",
+ blocks:[
+  {t:"ex",
+   q:"Make an HMM table with respect to the given matrices.<br><b>i/p:</b> Test passed &nbsp;&nbsp;<b>o/p:</b> [('test','NN'), ('passed','VB')]<br>IPM = π = [ 0.9 (NN), 0.1 (VB) ]",
+   a:"<b>Step 1 — enumerate the 4 state paths</b><br><br>i) &lt;s&gt; →<sup>0.9</sup> NN →<sup>0.5</sup> NN →<sup>0.05</sup> E &nbsp;&nbsp;| NN→test 0.9 · NN→passed 0.08<br>ii) &lt;s&gt; →<sup>0.9</sup> NN →<sup>0.9</sup> VB →<sup>0.05</sup> E &nbsp;&nbsp;| NN→test 0.9 · VB→passed 0.92<br>iii) &lt;s&gt; →<sup>0.1</sup> VB →<sup>0.45</sup> NN →<sup>0.05</sup> E &nbsp;&nbsp;| VB→test 0.1 · NN→passed 0.08<br>iv) &lt;s&gt; →<sup>0.1</sup> VB →<sup>0.5</sup> VB →<sup>0.05</sup> E &nbsp;&nbsp;| VB→test 0.1 · VB→passed 0.92<br><br><b>Step 2 — HMM table</b><br><table class='nb-t'><tr><th>X₀</th><th>X₁</th><th>π(X₀)</th><th>P(O₀,X₀)</th><th>P(X₀,X₁)</th><th>P(O₁,X₁)</th><th>P(X₁)</th><th>Pr</th><th>Nor Pr</th></tr><tr><td>NN</td><td>NN</td><td>0.9</td><td>0.9</td><td>0.05</td><td>0.08</td><td>0.05</td><td>0.000162</td><td>0.00475</td></tr><tr><td><b>NN</b></td><td><b>VB</b></td><td>0.9</td><td>0.9</td><td>0.90</td><td>0.92</td><td>0.05</td><td><b>0.033534</b></td><td><b>0.98323</b></td></tr><tr><td>VB</td><td>NN</td><td>0.1</td><td>0.1</td><td>0.45</td><td>0.08</td><td>0.05</td><td>0.00018</td><td>0.00528</td></tr><tr><td>VB</td><td>VB</td><td>0.1</td><td>0.1</td><td>0.5</td><td>0.92</td><td>0.05</td><td>0.000230</td><td>0.00674</td></tr></table><br>Normalized Pr = Pr / Σ Pr<br><br><b>∴ (test, NN), (passed, VB)</b> wins with 98.3% of the probability mass."}
+ ]
+},
+{
+ heading:"HMM State Diagram — Path Probability", page:"p.26 · 27/8",
+ blocks:[
+  {t:"p", v:"<b>HMM transitions:</b> &lt;s&gt;→JJ 0.7 · &lt;s&gt;→NN 0.25 · JJ→JJ 0.1 · JJ→NN 0.8 · NN→JJ 0.45 · NN→NN 0.15 · NN→&lt;/s&gt; 0.4 · JJ→&lt;/s&gt; 0.1"},
+  {t:"ex",
+   q:"Score the tag path for the observation sequence <b>hot · lead · cold · feet</b>.",
+   a:"<b>Path:</b> S →<sup>0.7</sup> JJ →<sup>0.8</sup> NN →<sup>0.95</sup> JJ →<sup>0.8</sup> NN →<sup>0.4</sup> &lt;/s&gt;<br><b>Emissions:</b> JJ→hot 0.4 · NN→lead 0.55 · JJ→cold 0.45 · NN→feet 0.42<br><br>P = 0.7 × 0.8 × 0.45 × 0.8 × 0.4 × 0.4 × 0.55 × 0.45 × 0.42<br><br><i>(left unevaluated in the notebook — the point is the alternating transition × emission structure)</i>"}
+ ]
+},
+{
+ heading:"★ Viterbi Algorithm", page:"p.26",
+ blocks:[
+  {t:"p", v:"O = sequence of observations<br>o₁, o₂, o₃, … o_T = individual observations<br>T = no. of observations<br>M = λ (the model)"},
+  {t:"p", v:"<b>Input:</b>"},
+  {t:"list", v:["observations of T length","state graph"]}
+ ]
+},
+{
+ heading:"★ Viterbi — Full Worked Sum", page:"p.27",
+ blocks:[
+  {t:"ex",
+   q:"For the given training corpus:<br>&lt;s&gt; Martin Justin can watch Will &lt;E&gt;<br>&lt;s&gt; Spot will watch Martin &lt;E&gt;<br>&lt;s&gt; Will Justin spot Martin &lt;E&gt;<br>&lt;s&gt; Martin will Pat spot &lt;E&gt;<br><br>Calculate the most probable tag sequence using the Viterbi algorithm &amp; calculate the path probability for the test sentence <b>&lsquo;Justin will spot Will&rsquo;</b>.",
+   a:"<b>Step 1 — assign correct POS tags to the training corpus</b><br><br><table class='nb-t'><tr><td>Martin</td><td>Justin</td><td>can</td><td>watch</td><td>Will</td></tr><tr><td><b>N</b></td><td><b>N</b></td><td><b>M</b></td><td><b>V</b></td><td><b>N</b></td></tr></table><table class='nb-t'><tr><td>Spot</td><td>will</td><td>watch</td><td>Martin</td></tr><tr><td><b>N</b></td><td><b>M</b></td><td><b>V</b></td><td><b>N</b></td></tr></table><table class='nb-t'><tr><td>Will</td><td>Justin</td><td>spot</td><td>Martin</td></tr><tr><td><b>M</b></td><td><b>N</b></td><td><b>V</b></td><td><b>N</b></td></tr></table><table class='nb-t'><tr><td>Martin</td><td>will</td><td>Pat</td><td>spot</td></tr><tr><td><b>N</b></td><td><b>M</b></td><td><b>V</b></td><td><b>N</b></td></tr></table><br>where <b>N → Noun · M → modal verb · V → verb</b><br><br><b>Step 2 — emission / observation probability matrix</b><br><table class='nb-t'><tr><th></th><th>N (9)</th><th>M (4)</th><th>V (4)</th></tr><tr><td>Martin</td><td>4/9</td><td>0</td><td>0</td></tr><tr><td>Justin</td><td>2/9</td><td>0</td><td>0</td></tr><tr><td>Will</td><td>1/9</td><td>3/4</td><td>0</td></tr><tr><td>Spot</td><td>2/9</td><td>0</td><td>1/4</td></tr><tr><td>can</td><td>0</td><td>1/4</td><td>0</td></tr><tr><td>watch</td><td>0</td><td>0</td><td>2/4</td></tr><tr><td>pat</td><td>0</td><td>0</td><td>1/4</td></tr></table><br><b>Step 3 — state transition probability matrix</b><br><table class='nb-t'><tr><th></th><th>N</th><th>M</th><th>V</th><th>&lt;E&gt;</th></tr><tr><td>&lt;s&gt;</td><td>3/4</td><td>1/4</td><td>0</td><td>0</td></tr><tr><td>N</td><td>1/9</td><td>1/9</td><td>1/9</td><td>4/9</td></tr><tr><td>M</td><td>1/4</td><td>0</td><td>3/4</td><td>0</td></tr><tr><td>V</td><td>1</td><td>0</td><td>0</td><td>0</td></tr></table><br><b>Step 4 — state graph</b><br><table class='nb-t'><tr><th>&lt;s&gt;</th><th>Justin</th><th>will</th><th>spot</th><th>Will</th><th>&lt;E&gt;</th></tr><tr><td></td><td>N</td><td>N</td><td>V</td><td>N</td><td></td></tr><tr><td></td><td></td><td>M</td><td>N</td><td>M</td><td></td></tr></table>1 × 2 × 2 × 2 = <b>8 possible paths</b><br><br>At each node keep only the <b>greater-value path</b> (prev prob × emission × transition), then read the surviving path back.<br><br><b>∴ &lt;s&gt; Justin[N] will[M] spot[V] Will[N] &lt;E&gt;</b><br><b>Path probability = 0.000374</b>"},
+  {t:"note", v:"Margin note: <b>&ldquo;prev prob × emission × transition&rdquo;</b> — that is the per-node update rule, and <b>&ldquo;we choose the greater value path&rdquo;</b> is what makes it Viterbi rather than brute-force enumeration. The MSE asks you to <b>show the state graph</b>, so draw the trellis and mark the surviving arcs."}
+ ]
+},
+{
+ heading:"Parsing &amp; Left-most Derivation", page:"p.28 · 1/9/26",
+ blocks:[
+  {t:"p", v:"<b>• Parsing</b> — a method of analyzing."},
+  {t:"ex",
+   q:"Input: <b>a flight</b><br>NP → Det Nominal ; Nominal → Noun | Nominal Noun ; Det → a/an/the ; Noun → cat/ground/butterfly",
+   a:"NP → Det Nominal<br>&nbsp;&nbsp;→ a Nominal &nbsp;(Det → a)<br>&nbsp;&nbsp;→ a Noun &nbsp;(Nominal → Noun)<br>&nbsp;&nbsp;→ a flight &nbsp;(Noun → flight)<br><br><b>Parse tree</b> &nbsp;<i>(top-down approach)</i><pre class='nb-tree'>      NP\n     /  \\\n   Det  Nominal\n    |      |\n    a    Noun\n           |\n        flight</pre>"},
+  {t:"ex",
+   q:"i/p: <b>the boy sees a dog.</b><br>S → NP VP ; NP → Det N ; VP → V NP ; Det → the/a ; N → boy/dog ; V → sees/likes",
+   a:"S → NP VP<br>&nbsp;&nbsp;→ Det N VP &nbsp;(NP → Det N)<br>&nbsp;&nbsp;→ the N VP &nbsp;(Det → the)<br>&nbsp;&nbsp;→ the boy VP &nbsp;(N → boy)<br>&nbsp;&nbsp;→ the boy V NP &nbsp;(VP → V NP)<br>&nbsp;&nbsp;→ the boy sees NP &nbsp;(V → sees)<br>&nbsp;&nbsp;→ the boy sees Det N &nbsp;(NP → Det N)<br>&nbsp;&nbsp;→ the boy sees a N &nbsp;(Det → a)<br>&nbsp;&nbsp;→ the boy sees a dog &nbsp;(N → dog)<br><br><b>Parse tree</b> &nbsp;<i>(left-most derivation)</i><pre class='nb-tree'>          S\n        /   \\\n      NP     VP\n     /  \\   /   \\\n   Det   N  V    NP\n    |    |  |   /  \\\n   the  boy sees Det  N\n                  |   |\n                  a  dog</pre>"}
+ ]
+},
+{
+ heading:"★ Left-most Derivation — MSE Questions", page:"p.29–p.30",
+ blocks:[
+  {t:"warn", v:"Marked <b>&ldquo;in MSE&rdquo;</b> with a star in the notebook. This is MSE Q3(d): <b>CFG — left-most derivation + parse tree</b>."},
+  {t:"ex",
+   q:"Perform left-most derivation &amp; compute the parse tree to check the string:<br><b>&ldquo;The Panda eats leaves&rdquo;</b><br><br>S → NP VP ; NP → DT NN ; VP → VB NN ; DT → a/the ; NN → man/woman/Panda/lion/leaves ; VB → eats/shoots/leaves",
+   a:"<b>Step 1 — label the grammar rules</b><br>S → NP VP <sup>(1)</sup><br>NP → DT NN <sup>(2)</sup><br>VP → VB NN <sup>(3)</sup><br>DT → a <sup>(4)</sup> / the <sup>(5)</sup><br>NN → man <sup>(6)</sup> / woman <sup>(7)</sup> / Panda <sup>(8)</sup> / lion <sup>(9)</sup> / leaves <sup>(10)</sup><br>VB → eats <sup>(11)</sup> / shoots <sup>(12)</sup> / leaves <sup>(13)</sup><br><br><b>Step 2 — perform the left-most derivation</b><br>S → NP VP &nbsp;(1)<br>&nbsp;&nbsp;→ DT NN VP &nbsp;(2)<br>&nbsp;&nbsp;→ The NN VP &nbsp;(5)<br>&nbsp;&nbsp;→ The Panda VP &nbsp;(8)<br>&nbsp;&nbsp;→ The Panda VB NN &nbsp;(3)<br>&nbsp;&nbsp;→ The Panda eats NN &nbsp;(11)<br>&nbsp;&nbsp;→ <b>The Panda eats leaves</b> &nbsp;(10)<br><br><b>Step 3 — generate the parse tree</b><pre class='nb-tree'>            S ¹\n          /   \\\n       NP ²    VP ³\n      /   \\    /   \\\n   DT⁵   NN⁸ VB¹¹  NN¹⁰\n    |     |    |     |\n   The  Panda eats leaves</pre>"},
+  {t:"ex",
+   q:"i/p: <b>The teacher gives a book to the student</b><br><br>S → NP VP ; NP → DT NN ; VP → VB NP PP ; PP → Prep NP ; DT → The/a ; NN → teacher/student/book ; VB → gives ; Prep → to",
+   a:"<b>Step 1 — label</b><br>S → NP VP <sup>(1)</sup> · NP → DT NN <sup>(2)</sup> · VP → VB NP PP <sup>(3)</sup> · PP → Prep NP <sup>(4)</sup><br>DT → The <sup>(5)</sup> / a <sup>(6)</sup> · NN → teacher <sup>(7)</sup> / student <sup>(8)</sup> / book <sup>(9)</sup> · VB → gives <sup>(10)</sup> · Prep → to <sup>(11)</sup><br><br><b>Step 2 — left-most derivation</b><br>S → NP VP &nbsp;(1)<br>&nbsp;&nbsp;→ DT NN VP &nbsp;(2)<br>&nbsp;&nbsp;→ The NN VP &nbsp;(5)<br>&nbsp;&nbsp;→ The teacher VP &nbsp;(7)<br>&nbsp;&nbsp;→ The teacher VB NP PP &nbsp;(3)<br>&nbsp;&nbsp;→ The teacher gives NP PP &nbsp;(10)<br>&nbsp;&nbsp;→ The teacher gives DT NN PP &nbsp;(2)<br>&nbsp;&nbsp;→ The teacher gives a NN PP &nbsp;(6)<br>&nbsp;&nbsp;→ The teacher gives a book PP &nbsp;(9)<br>&nbsp;&nbsp;→ The teacher gives a book Prep NP &nbsp;(4)<br>&nbsp;&nbsp;→ The teacher gives a book to NP &nbsp;(11)<br>&nbsp;&nbsp;→ The teacher gives a book to DT NN &nbsp;(2)<br>&nbsp;&nbsp;→ The teacher gives a book to the NN &nbsp;(5)<br>&nbsp;&nbsp;→ <b>The teacher gives a book to the student</b> &nbsp;(8)<br><br><b>Step 3 — parse tree</b><pre class='nb-tree'>              S ¹\n            /   \\\n         NP ²     VP ³\n        /   \\   /   |   \\\n     DT⁵  NN⁷ VB¹⁰ NP²   PP⁴\n      |    |    |   / \\   /  \\\n     The teacher gives     Prep¹¹ NP²\n                 DT⁶ NN⁹   |     /  \\\n                  a  book  to  DT⁵  NN⁸\n                                |     |\n                               the student</pre>"}
+ ]
+},
+{
+ heading:"Chomsky Normal Form (CNF)", page:"p.30",
+ blocks:[
+  {t:"p", v:"Rules noted in class:"},
+  {t:"table", head:["Rule","Marked"], rows:[
+   ["S → aSb | ab","✓"],
+   ["A → a","✓"],
+   ["B → b","✓"],
+   ["X → YZA","✗"]
+  ]},
+  {t:"warn", v:"<b>Check this against the definition.</b> A grammar is in CNF only if every rule is <b>A → BC</b> (exactly two non-terminals) or <b>A → a</b> (a single terminal). By that rule: <b>A → a ✓</b> and <b>B → b ✓</b>; <b>X → YZA ✗</b> (three non-terminals) — those three match the notebook. But <b>S → aSb</b> mixes terminals with non-terminals and has three symbols on the right, so it is <b>not</b> in CNF, and <b>S → ab</b> is two terminals, also not CNF. Treat the ✓ on that first line as a slip, and remember the CYK algorithm <i>requires</i> CNF input."}
+ ]
+},
+{
+ heading:"★ CYK / CKY Parser", page:"p.30–p.31",
+ blocks:[
+  {t:"p", v:"<b>• Cocke-Younger-Kasami (CYK or CKY parser)</b> — fill the chart bottom-up until you <b>reach the root of the parse tree</b> (S in the top-right cell)."},
+  {t:"ex",
+   q:"Construct the CYK table &amp; parse tree for the input sentence <b>&ldquo;The flight includes a meal&rdquo;</b>.<br><br>S → NP VP ; NP → Det N ; VP → V NP ; V → includes ; Det → The ; Det → a ; N → meal ; N → flight",
+   a:"<b>CYK chart</b> — cell (i,j) holds every non-terminal that can generate the span from word i to word j.<br><br><table class='nb-t'><tr><th></th><th>The</th><th>flight</th><th>includes</th><th>a</th><th>meal</th></tr><tr><th>The</th><td>Det</td><td><b>NP</b></td><td>—</td><td>—</td><td><b>S</b></td></tr><tr><th>flight</th><td></td><td>N</td><td>—</td><td>—</td><td>—</td></tr><tr><th>includes</th><td></td><td></td><td>V</td><td>—</td><td><b>VP</b></td></tr><tr><th>a</th><td></td><td></td><td></td><td>Det</td><td><b>NP</b></td></tr><tr><th>meal</th><td></td><td></td><td></td><td></td><td>N</td></tr></table><br><b>Reading order:</b> Det + N → NP (&ldquo;The flight&rdquo;) · Det + N → NP (&ldquo;a meal&rdquo;) · V + NP → VP (&ldquo;includes a meal&rdquo;) · NP + VP → <b>S</b> — the root is reached, so the string is accepted.<br><br><b>Parse tree</b><pre class='nb-tree'>            S\n          /   \\\n        NP      VP\n       /  \\    /   \\\n     Det  Noun V     NP\n      |    |   |    /   \\\n     The flight includes Det Noun\n                          |    |\n                          a   meal</pre>"},
+  {t:"ex",
+   q:"Same method for <b>&ldquo;A student reads a book&rdquo;</b>.<br><br>S → NP VP ; NP → Det N ; VP → V NP ; Det → a ; N → student/book ; V → reads",
+   a:"<table class='nb-t'><tr><th></th><th>A</th><th>student</th><th>reads</th><th>a</th><th>book</th></tr><tr><th>A</th><td>Det</td><td><b>NP</b></td><td>—</td><td>—</td><td><b>S</b></td></tr><tr><th>student</th><td></td><td>N</td><td>—</td><td>—</td><td>—</td></tr><tr><th>reads</th><td></td><td></td><td>V</td><td>—</td><td><b>VP</b></td></tr><tr><th>a</th><td></td><td></td><td></td><td>Det</td><td><b>NP</b></td></tr><tr><th>book</th><td></td><td></td><td></td><td></td><td>N</td></tr></table><br><b>Parse tree</b><pre class='nb-tree'>            S\n          /   \\\n        NP      VP\n       /  \\    /   \\\n     Det   N  V      NP\n      |    |  |     /   \\\n      A student reads Det   N\n                       |    |\n                       a   book</pre>"}
+ ]
+},
+{
+ heading:"★ PCFG — Probabilistic Context Free Grammar", page:"p.31–p.32",
+ blocks:[
+  {t:"p", v:"<b>PCFG</b> = a CFG in which every production carries a probability. The probability of a parse tree is the <b>product of the probabilities of every rule used in it</b>."},
+  {t:"ex",
+   q:"Compute the probability of the parse tree of the input string <b>&lsquo;The mouse chased the cat.&rsquo;</b><br><br><b>Partial PCFG:</b><br>S → NP VP &nbsp;0.75<br>NP → DT NN &nbsp;0.25<br>VP → VB NP &nbsp;0.35<br>NN → mouse 0.25 / cat 0.1 / dog 0.4<br>VB → chased 0.3 / dodged 0.5<br>DT → the 0.2 / a 0.35",
+   a:"<b>Parse tree with rule probabilities</b><pre class='nb-tree'>              S  0.75\n            /      \\\n     NP 0.25        VP 0.35\n     /    \\         /     \\\n  DT 0.2  NN 0.25 VB 0.3   NP 0.25\n   |        |       |      /     \\\n  The     mouse  chased  DT 0.2  NN 0.1\n                          |        |\n                         the      cat</pre><br><b>P = 0.75 × 0.25 × 0.2 × 0.25 × 0.35 × 0.3 × 0.25 × 0.2 × 0.1</b><br>= <b>4.92 × 10⁻⁶</b> &nbsp;(0.00000492)"},
+  {t:"warn", v:"The notebook writes this final value as <b>0.00000792</b>. Multiplying out the nine factors it lists gives <b>0.00000492</b> — the leading digit looks like a 4 written over a 7 in the scan. Recompute rather than memorising the number, and always <b>show the chain of factors</b> so you get method marks even if the arithmetic slips."},
+  {t:"ex",
+   q:"Compute the probability of the parse tree for <b>&lsquo;A pilot likes flying planes&rsquo;</b>.<br><i>(the notebook marks &ldquo;q. in slide&rdquo; — the grammar comes from the lecture slides)</i>",
+   a:"<b>Parse tree</b><pre class='nb-tree'>              S  1.0\n            /      \\\n     NP 0.3         VP 0.1\n     /    \\         /     \\\n  DT 0.1  NN 0.3  VB 0.4   NP\n   |        |       |      /   \\\n   A      pilot   likes  JJ 0.5  NNS 0.34\n                           |       |\n                        flying   planes</pre><br>P = 1 × 0.3 × 0.3 × 0.1 × 0.1 × 0.4 × 0.5 × 0.34<br><b>= 0.00000612</b> &nbsp;<i>(as recorded in the notebook)</i><br><br>The second reading — <b>&lsquo;flying planes&rsquo; as VP (planes that are flying)</b> vs <b>NP (the act of flying planes)</b> — is the classic PP/gerund attachment ambiguity, and a PCFG resolves it by picking whichever tree has the higher product."},
+  {t:"note", v:"Cross-reference: PCFG is <b>MSE Q1(d) — 2 marks</b>. For 2 marks you need the definition + one short product, not a full chart."}
+ ]
+},
+{
+ heading:"Predictive Parser", page:"p.33",
+ blocks:[
+  {t:"ex",
+   q:"Trace a predictive parser on <b>&lsquo;The dog chases a cat&rsquo;</b>.<br><br>S → NP VP ; NP → Det N ; VP → V NP ; Det → the/a ; N → cat/dog ; V → chases/sees",
+   a:"<table class='nb-t'><tr><th>Stack (top → bottom)</th><th>i/p remaining</th><th>Action</th></tr><tr><td>S $</td><td>the dog chases a cat $</td><td>table[S, &lsquo;the&rsquo;] → S → NP VP</td></tr><tr><td>NP VP $</td><td>the dog chases a cat $</td><td>pop S, push NP VP</td></tr><tr><td>Det N VP $</td><td>the dog chases a cat $</td><td>table[NP, &lsquo;the&rsquo;] → NP → Det N ; pop NP, push N Det</td></tr><tr><td>N VP $</td><td>dog chases a cat $</td><td>table[Det, &lsquo;the&rsquo;] → Det → the ; Det is terminal → <b>match (1st)</b></td></tr><tr><td>VP $</td><td>chases a cat $</td><td>table[N, &lsquo;dog&rsquo;] → N → dog ; <b>match (2nd)</b></td></tr><tr><td>V NP $</td><td>chases a cat $</td><td>table[VP, &lsquo;chases&rsquo;] → VP → V NP ; push NP V</td></tr></table><br><i>The notebook trace stops here; it continues identically — match &lsquo;chases&rsquo;, expand NP → Det N, match &lsquo;a&rsquo;, match &lsquo;cat&rsquo;, stack empties at $ ⇒ accepted.</i>"},
+  {t:"note", v:"A predictive (LL(1)) parser is <b>top-down and table-driven</b>: it never backtracks — the parse table entry [non-terminal, lookahead] picks the production deterministically."}
+ ]
+},
+{
+ heading:"Earley Parser", page:"p.34",
+ blocks:[
+  {t:"p", v:"<b>• Earley Parser</b> — <b>top-down</b> chart parser using dotted rules and three operations: <b>predict · scan · complete</b>."},
+  {t:"ex",
+   q:"Trace the Earley parser on <b>&lsquo;Dog chases a cat&rsquo;</b>.<br><br>S → NP VP ; NP → Det N / N ; VP → V NP ; Det → &lsquo;the&rsquo;/&lsquo;a&rsquo; ; N → &lsquo;cat&rsquo;/&lsquo;dog&rsquo; ; V → &lsquo;chases&rsquo;/&lsquo;sees&rsquo;",
+   a:"<table class='nb-t'><tr><th>Operation type</th><th>Production rule</th><th>Completed status</th></tr><tr><td>initialization</td><td>S → . NP VP</td><td>0</td></tr><tr><td>predict</td><td>NP → . Det N</td><td>0</td></tr><tr><td></td><td>NP → . N</td><td>0</td></tr><tr><td><b>scan: dog</b></td><td>NP → N .</td><td>1 &nbsp;<i>(1st word is scanned)</i></td></tr><tr><td>complete</td><td>S → NP . VP</td><td>1</td></tr><tr><td>predict</td><td>VP → . V NP</td><td>1</td></tr><tr><td><b>scan: chases</b></td><td>VP → V . NP</td><td>2 &nbsp;<i>(2nd word is scanned)</i></td></tr><tr><td>predict</td><td>NP → . Det N</td><td>2</td></tr><tr><td></td><td>NP → . N</td><td>2</td></tr><tr><td><b>scan: a</b></td><td>NP → Det . N</td><td>3 &nbsp;<i>(3rd word is scanned)</i></td></tr><tr><td><b>scan: cat</b></td><td>NP → Det N .</td><td>4 &nbsp;<i>(4th word is scanned)</i></td></tr><tr><td>complete</td><td>S → NP VP .</td><td>4</td></tr></table><br>The final row <b>S → NP VP .</b> with the dot at the end and status = 4 (all words consumed) means the string is <b>accepted</b>."},
+  {t:"warn", v:"The notebook labels the third scan &ldquo;scan: the&rdquo;, but the input string is &lsquo;Dog chases <b>a</b> cat&rsquo; — the word being scanned there is <b>a</b>. Corrected above."},
+  {t:"note", v:"The last page also starts a heading <b>&ldquo;Maximum …&rdquo;</b> (Maximum Entropy / MEMM) which is cut off at the edge of the scan — nothing further was captured. The Module 3 Theory &amp; Numericals tabs cover MEMM."}
+ ]
+}
+];
+
+/* =========================================================
+   PRACTICE QUESTIONS CARRIED FORWARD FROM THE CLASS NOTES
+   Every question below was set by the professor in class
+   (notebook "NLP Notes.pdf"). They are appended to the
+   matching numerical topic and tagged src:"notes" so they
+   show a "class notes" pill and track progress like the rest.
+   ========================================================= */
+(function(){
+  function addTo(mod, topicId, items){
+    const t = (DATA.numericals[mod]||[]).find(x=>x.id===topicId);
+    if(!t) return;
+    items.forEach(it=>{ it.src="notes"; t.practice.push(it); });
+  }
+
+  /* ---------- MODULE 2 ---------- */
+  addTo("m2","m2n1",[
+   {id:"nb-m2-ttr1", difficulty:"exam-level",
+    q:"Calculate the tokens and the type of every token for: \"The point that I am going to point out from my point of view is the point that you will definitely point from your point of view if you understand my point.\"",
+    answer:"Tokens = 31.\nType counts: The:2, point:7, that:2, I:1, am:1, going:1, to:1, from:2, my:2, of:2, view:2, is:1, you:2, will:1, definitely:1, your:1, if:1, understand:1.\nDistinct types = 18, so whole-text TTR = 18/31 ≈ 0.58.\n(The word 'point' dominating with 7 occurrences is what drags TTR down — this is the point of the example.)"},
+   {id:"nb-m2-ttr2", difficulty:"exam-level",
+    q:"\"Kal mein market gaya tha aur market se sabzi khareedi, phir main ghar aaya aur ghar par khana banaya.\" Calculate the tokens, type(market) and type(main).",
+    answer:"Tokens = 19.\ntype(market) = 2\ntype(main) = 1\n(Note 'mein' and 'main' are different word forms — count them separately. This example was given to show tokenisation is language-independent: the same counting rules apply to Hindi/Romanised text.)"},
+   {id:"nb-m2-ttr3", difficulty:"exam-level",
+    q:"\"Don't judge the state-of-the-art model by its size, the model's size doesn't define the model.\" Calculate the tokens and type(model).",
+    answer:"Tokens = 21.\ntype(model) = 2 — only the bare form 'model' counts; \"model's\" is a different surface form.\nRelative frequency of 'model' = 2/21 ≈ 0.095.\n(Written in the notes as \"TTR(model) = 2/21\" — strictly this is the relative frequency of that word, not the text's TTR.)"},
+   {id:"nb-m2-ttr4", difficulty:"basic",
+    q:"\"To be or not to be, that is the question\" — calculate the tokens and the TTR.",
+    answer:"Tokens = 10.\nTypes = 8 (to, be, or, not, that, is, the, question) — 'to' and 'be' each occur twice.\nTTR = 8/10 = 0.8 (high lexical diversity).\nRepeated types = 2, i.e. type(to)=2 and type(be)=2 — the notes record this as \"2/10\"."},
+   {id:"nb-m2-ttr5", difficulty:"basic",
+    q:"\"The dog ran to the park. The dog saw a cat. The cat ran away & the dog barked.\" Given the word 'dog', calculate its relative frequency.",
+    answer:"P(w) = count(w) / N\ntokens N = 19\ncount(dog) = 3\nP(dog) = 3/19 ≈ 0.158"},
+   {id:"nb-m2-ttr6", difficulty:"basic",
+    q:"Smart Assist: \"Online shopping has become increasingly popular. Many customers purchase products through mobile applications. Some customers also read product reviews before making a purchase.\" Calculate tokens, types and TTR.",
+    answer:"tokens = 37\ntypes = 28\nTTR = 28/37 ≈ 0.757\nInterpretation: TTR > 0.70, so this passage has HIGH lexical diversity. The repeats are 'customers' (2), 'product/products/purchase' family and function words."}
+  ]);
+
+  addTo("m2","m2n2",[
+   {id:"nb-m2-zipf1", difficulty:"exam-level",
+    q:"A word at rank r₁ = 20 has frequency f₁ = 1896. What is the frequency f₂ of the word at rank r₂ = 8?",
+    answer:"Zipf's Law: f ∝ 1/r, so f·r = K (a constant).\nStep 1 — find K from the known pair:\n  K = f₁ · r₁ = 1896 × 20 = 37920\nStep 2 — apply to rank 8:\n  f₂ · r₂ = K → f₂ × 8 = 37920\n  f₂ = 37920 / 8\n∴ f₂ = 4740"},
+   {id:"nb-m2-zipf2", difficulty:"exam-level",
+    q:"Two words have m_r = 20 and m_E = 30 meanings respectively. Using the meaning–rank form of Zipf's Law, find the ratio r₁ : r₂ of their ranks.",
+    answer:"Meaning form of Zipf's Law: m ∝ 1/√r\nSo m₁/m₂ = √r₂ / √r₁\n  20/30 = √(r₂/r₁)\nSquare both sides:\n  (20/30)² = r₂/r₁\n  400/900 = 4/9 = r₂/r₁\n∴ r₁ : r₂ = 9 : 4\n(Sanity check: fewer meanings ⇒ higher rank number ⇒ rarer word. The 30-meaning word has the smaller rank number, as expected.)"}
+  ]);
+
+  addTo("m2","m2n3",[
+   {id:"nb-m2-porter1", difficulty:"exam-level",
+    q:"Compute the Porter stemmer measure m for the word 'youthfullnesses' using the form [C][VC]^m[V].",
+    answer:"Write the C/V pattern letter by letter:\n  y o u t h f u l l n e s s e s\n  c v v c c  c v c c  c v c c v c\nCollapse each run of consecutive C's to one C and each run of V's to one V:\n  C V C V C V C V C\nStrip the optional leading [C] and match the [VC] blocks:\n  C [VC]⁴\n∴ m = 4"},
+   {id:"nb-m2-porter2", difficulty:"challenge",
+    q:"Compute the Porter stemmer measure m for 'pseudopseudohypoparathyroidism'.",
+    answer:"Write the pattern and collapse runs:\n  p s e u d o p s e u d o h y p o p a r a t h y r o i d i s m\n  C V C V C V C V C V C V C V C V C V C V C V C\nMatch against [C][VC]^m[V]:\n  C [VC]¹¹\n∴ m = 11\n(Method mark tip: show the collapsed C/V string — that is what is actually being marked, not the final integer.)"}
+  ]);
+
+  addTo("m2","m2n4",[
+   {id:"nb-m2-ng1", difficulty:"exam-level",
+    q:"Corpus: <s> I like NLP </s> · <s> I like Blockchain </s> · <s> Sam likes NLP </s>\n(i) Calculate the unigram probability of each word. (ii) Calculate the unigram sentence probability of 'I like NLP'.",
+    answer:"Step 1 — frequency table (unigram IGNORES the <s>/</s> markers):\n  I:2, like:2, NLP:2, Blockchain:1, Sam:1, likes:1\n  tokens N = 9\n\nStep 2 — P(wᵢ) = c(wᵢ)/N:\n  P(I) = 2/9, P(like) = 2/9, P(NLP) = 2/9\n  P(Blockchain) = 1/9, P(Sam) = 1/9, P(likes) = 1/9\n\n(ii) P(S) = ∏ P(wᵢ) = 2/9 × 2/9 × 2/9 = 8/729 ≈ 0.011"},
+   {id:"nb-m2-ng2", difficulty:"exam-level",
+    q:"Using the same corpus (<s> I like NLP </s> · <s> I like Blockchain </s> · <s> Sam likes NLP </s>), calculate the BIGRAM probability of the sentence <s> I like NLP </s>.",
+    answer:"P(wᵢ|wᵢ₋₁) = c(wᵢ₋₁,wᵢ) / c(wᵢ₋₁)   — bigram DOES use the boundary markers.\n\nP(I | <s>)    = c(<s>,I)/c(<s>)    = 2/3\nP(like | I)   = c(I,like)/c(I)     = 2/2 = 1\nP(NLP | like) = c(like,NLP)/c(like)= 1/2\nP(</s> | NLP) = c(NLP,</s>)/c(NLP) = 2/2 = 1\n\nP(sentence) = 2/3 × 1 × 1/2 × 1 = 1/3 ≈ 0.33"},
+   {id:"nb-m2-ng3", difficulty:"exam-level",
+    q:"Corpus (7 sentences):\n<s> I am Henry </s> · <s> I like college </s> · <s> Do Henry like college </s> · <s> Henry I am </s> · <s> Do I like Henry </s> · <s> Do I like college </s> · <s> I do like college </s>\n\nWhat is the most probable next word for: (i) \"Do ___\" (bigram) and (ii) \"<s> I like Henry ___\" (bigram)?",
+    answer:"Frequency table: I:6, am:2, Henry:5, like:5, college:3, Do:4, <s>:7, </s>:7 — tokens = 39\n\n(i) After 'Do':\n  P(Henry|Do) = c(Do,Henry)/c(Do) = 1/4 = 0.25\n  P(I|Do)     = c(Do,I)/c(Do)     = 2/4 = 0.50  ← highest\n  P(like|Do)  = c(Do,like)/c(Do)  = 1/4 = 0.25\n  ∴ 'I' is the most probable next word.\n\n(ii) After 'Henry':\n  P(</s>|Henry) = c(Henry,</s>)/c(Henry) = 3/5 = 0.60  ← highest\n  P(like|Henry) = 1/5 = 0.20\n  P(I|Henry)    = 1/5 = 0.20\n  ∴ '</s>' is most probable — the sentence ends."},
+   {id:"nb-m2-ng4", difficulty:"exam-level",
+    q:"On the same 7-sentence Henry/college corpus: (iii) most probable next word for \"<s> Do I like ___\" using a TRIGRAM, and (iv) for \"<s> Do I like college ___\" using a FOUR-GRAM.",
+    answer:"(iii) Trigram: P(wᵢ|wᵢ₋₂,wᵢ₋₁) = c(wᵢ₋₂,wᵢ₋₁,wᵢ)/c(wᵢ₋₂,wᵢ₋₁)\n  History = (I, like); c(I,like) = 3\n  P(college | I,like) = c(I,like,college)/c(I,like) = 2/3  ← highest\n  P(Henry   | I,like) = c(I,like,Henry)/c(I,like)   = 1/3\n  ∴ 'college' is the most probable word.\n\n(iv) Four-gram: P(wᵢ|wᵢ₋₃,wᵢ₋₂,wᵢ₋₁) = c(wᵢ₋₃,wᵢ₋₂,wᵢ₋₁,wᵢ)/c(wᵢ₋₃,wᵢ₋₂,wᵢ₋₁)\n  P(</s> | Do,I,like,college) = c(Do,I,like,college,</s>)/c(Do,I,like,college) = 1/1 = 1\n  ∴ '</s>' with probability 1.\n\nNote the professor's remark: no calculation-heavy numericals will be set on tri-/four-gram — know the formula and this reasoning."},
+   {id:"nb-m2-ng5", difficulty:"exam-level",
+    q:"On the 7-sentence Henry/college corpus, which sentence gets the higher BIGRAM probability?\nS₁ = <s> I like college </s>\nS₂ = <s> Do I like Henry </s>",
+    answer:"P(S₁) = P(I|<s>) × P(like|I) × P(college|like) × P(</s>|college)\n      = 3/7 × 3/6 × 3/5 × 3/3\n      = 3/7 × 1/2 × 3/5 × 1\n      = 9/70 ≈ 0.13\n\nP(S₂) = P(Do|<s>) × P(I|Do) × P(like|I) × P(Henry|like) × P(</s>|Henry)\n      = 3/7 × 2/4 × 3/6 × 2/5 × 3/5\n      ≈ 0.0257\n\n∴ S₁ (\"I like college\") has the higher probability.\nWhy: S₂ is longer, so it multiplies in one more fraction < 1 — longer sentences are systematically penalised by raw sentence probability. (This is exactly why perplexity normalises by length with the N-th root.)"}
+  ]);
+
+  addTo("m2","m2n5",[
+   {id:"nb-m2-lap1", difficulty:"exam-level",
+    q:"For the corpus below, compute the Laplace-smoothed probability of the test sentence.\nCorpus: <s> I am Sam </s> · <s> Sam I am </s> · <s> I do not like Sam </s>\nTest: <s> I am Sam </s>",
+    answer:"Word|Freq: <s>:3, </s>:3, I:3, am:2, Sam:3 → V = types = 6\n\nP(wᵢ|wᵢ₋₁) = ( c(wᵢ₋₁,wᵢ) + 1 ) / ( c(wᵢ₋₁) + V )\n\nP(I|<s>)   = (2+1)/(3+6) = 3/9 = 1/3\nP(am|I)    = (2+1)/(3+6) = 3/9 = 1/3\nP(Sam|am)  = (1+1)/(2+6) = 2/8 = 1/4\nP(</s>|Sam)= (2+1)/(3+6) = 3/9 = 1/3\n\nP(S) = 1/3 × 1/3 × 1/4 × 1/3 = 1/108 ≈ 0.009"},
+   {id:"nb-m2-lap2", difficulty:"exam-level",
+    q:"Corpus: <s> I am here </s> · <s> I like it </s> · <s> I am happy </s>\nCompute the Laplace-smoothed (i) P(here|I) (ii) P(it|I) (iii) P(happy|I) (iv) P(I|I).",
+    answer:"Word|Freq: <s>:3, </s>:3, I:3, am:2, here:1, like:1, it:1, happy:1 → V = 6, N = 9\nThe question asks for P(x | I) — a conditional on a previous word — so use the BIGRAM form:\n\nP(wᵢ|wᵢ₋₁) = ( c(wᵢ₋₁,wᵢ) + 1 ) / ( c(wᵢ₋₁) + V )\n\n(i)   P(here|I)  = (0+1)/(3+6) = 1/9   [the bigram is (am,here), not (I,here)]\n(ii)  P(it|I)    = (0+1)/(3+6) = 1/9   [the bigram is (like,it)]\n(iii) P(happy|I) = (0+1)/(3+6) = 1/9   [the bigram is (am,happy)]\n(iv)  P(I|I)     = (0+1)/(3+6) = 1/9   [never occurs]\n\nAll four are unseen bigrams, so all four collapse to the same smoothed floor 1/9 — without add-1 they would all be 0.\n\nTrap: the notes first tried the unigram form (1+1)/(9+6) = 2/15 and struck it out. Do not use the unigram form unless the question names a class."},
+   {id:"nb-m2-nb1", difficulty:"exam-level",
+    q:"Naive Bayes spam filter. Vocabulary size V = 8, total tokens in SPAM N = 20.\nCount in SPAM: Free:6, Money:5, Win:4, Click:3, Prize:2, Meeting:0, Project:0, Launch:0\nTest email: 'win free money meeting' — compute P(email | SPAM).",
+    answer:"P(w|class) = ( c(w) + 1 ) / ( N + V ) = ( c(w)+1 ) / 28\n\nP(win|SPAM)     = (4+1)/28 = 5/28\nP(free|SPAM)    = (6+1)/28 = 7/28 = 1/4\nP(money|SPAM)   = (5+1)/28 = 6/28\nP(meeting|SPAM) = (0+1)/28 = 1/28\n\nP(email|SPAM) = 5/28 × 7/28 × 6/28 × 1/28 = 210/614656\n              = 3.42 × 10⁻⁴\n\nKey point to write down: 'meeting' has count 0 in SPAM. Without add-1 smoothing the entire product would be 0 and the classifier could never assign this email to SPAM — that is the zero-probability problem this smoothing exists to fix."},
+   {id:"nb-m2-nb2", difficulty:"exam-level",
+    q:"Sentiment analysis of a product review using Naive Bayes. N = 25, V = 10.\nCount in POSITIVE: great:8, love:6, excellent:5, perfect:4, amazing:2, terrible:0, refund:0, broken:0\nTest sentence: 'product broken, please refund.' Classify it.\n\n(This one was set up but left unsolved in class.)",
+    answer:"P(w|POSITIVE) = ( c(w) + 1 ) / ( N + V ) = ( c(w)+1 ) / 35\n\nP(product|POS) = (0+1)/35 = 1/35   [unseen]\nP(broken|POS)  = (0+1)/35 = 1/35\nP(please|POS)  = (0+1)/35 = 1/35   [unseen]\nP(refund|POS)  = (0+1)/35 = 1/35\n\nP(review|POSITIVE) = (1/35)⁴ = 1/1,500,625 ≈ 6.66 × 10⁻⁷\n\nEvery content word of the review is unseen in the POSITIVE class, so the POSITIVE likelihood sits at its smoothed floor. The NEGATIVE class table would give 'broken' and 'refund' non-zero counts and therefore a far larger product.\n\n∴ Classify the review as NEGATIVE.\n\nExam note: you can only state the final class if you are given (or asked to assume) the NEGATIVE counts too. If the paper gives only one class table, compute that likelihood and say explicitly which comparison you would need to complete the decision."}
+  ]);
+
+  addTo("m2","m2n6",[
+   {id:"nb-m2-gt1", difficulty:"exam-level",
+    q:"Construct the frequency-of-frequencies (Nc) table for c = 1,2,3,4. Calculate the total probability mass assigned to unseen words, and the Good-Turing smoothed probability of 'cat'.\nTraining corpus (N = 20): the:4, cat:3, dog:3, runs:2, sits:2, red:1, blue:1, big:1, small:1, house:1, car:1",
+    answer:"a) Nc table (Nc = how many DISTINCT words occur exactly c times):\n  1 time  → red, blue, big, small, house, car  → N₁ = 6\n  2 times → runs, sits                          → N₂ = 2\n  3 times → cat, dog                            → N₃ = 2\n  4 times → the                                 → N₄ = 1\n\nb) Probability mass for unseen words:\n  P*_GT(0) = N₁/N = 6/20 = 0.30\n  ⇒ 30% of the probability mass is reserved for words never seen.\n\nc) GT probability for 'cat' (count c = 3):\n  c* = (c+1) × N_{c+1}/N_c = (3+1) × N₄/N₃ = 4 × (1/2) = 2\n  P(cat) = c*/N = 2/20 = 0.1\n\nNotice the discount: 'cat' was seen 3 times but is charged as 2. The count shaved off every seen word is what funds the 30% held back for unseen words."},
+   {id:"nb-m2-gt2", difficulty:"exam-level",
+    q:"Construct the Nc table for bigrams. Calculate the probability mass assigned to unseen bigrams and the Good-Turing probability of 'I want'.\nTraining corpus (N = 15): I like:4, I love:3, I want:2, I need:2, I play:1, I watch:1, I read:1, I study:1",
+    answer:"a) Nc table (count the number of distinct BIGRAMS at each frequency):\n  1 time  → I play, I watch, I read, I study → N₁ = 4\n  2 times → I want, I need                    → N₂ = 2\n  3 times → I love                            → N₃ = 1\n  4 times → I like                            → N₄ = 1\n\nb) Probability mass for unseen bigrams:\n  P*_GT(0) = N₁/N = 4/15 = 0.267\n  ⇒ approx 26.7% is reserved for unseen bigrams.\n\nc) GT probability for 'I want' (count c = 2):\n  c* = (c+1) × N_{c+1}/N_c = 3 × N₃/N₂ = 3 × (1/2) = 1.5\n  P(want|I) = c*/N = 1.5/15 = 0.1\n  (unsmoothed, for comparison: 2/15 ≈ 0.133)\n\nWATCH OUT: the class notes wrote N₃ = 3 and N₄ = 4 in the table — those are the occurrence counts, not the number of bigrams. Only one bigram occurs 3 times and one occurs 4 times, so N₃ = N₄ = 1. The notes' own final answer (c* = 1.5) only works with N₃ = 1, which confirms the table entry was a slip."}
+  ]);
+
+  addTo("m2","m2n7",[
+   {id:"nb-m2-pp1", difficulty:"exam-level",
+    q:"Compute the perplexity of the sentence \"She likes mangoes\" using a bigram model.\nCorpus: She likes apples. She likes bananas. He likes mangoes. They eat fruits. She likes grapes.",
+    answer:"Step 1 — rewrite the corpus with sentence boundaries:\n  <s> She likes apples </s>\n  <s> She likes banana </s>\n  <s> He likes mangoes </s>\n  <s> They eat fruits </s>\n  <s> She likes grapes </s>\n\nStep 2 — bigrams of the test sentence:\n  [<s>, she], [she, likes], [likes, mangoes], [mangoes, </s>]\n\nStep 3 — bigram probabilities:\n  P(she|<s>)      = c(<s>,she)/c(<s>)         = 3/5\n  P(likes|she)    = c(she,likes)/c(she)       = 3/3 = 1\n  P(mangoes|likes)= c(likes,mangoes)/c(likes) = 1/4\n  P(</s>|mangoes) = c(mangoes,</s>)/c(mangoes)= 1/1 = 1\n\n  P(W) = 3/5 × 1 × 1/4 × 1 = 3/20\n\nStep 4 — perplexity, N = 3 (words in the test sentence):\n  PP(W) = ᴺ√(1/P(W)) = ³√(1/(3/20)) = ³√(20/3) = ³√6.667\n\n  PP(W) = 1.8821"},
+   {id:"nb-m2-pp2", difficulty:"basic",
+    q:"Two unigram models score the sentence 'The patient feels very weak' (N = 5):\nP_A(W) = 0.00008, P_B(W) = 0.00002.\nCompute the perplexity of each and say which model is better.",
+    answer:"PP(W) = ᴺ√( 1/P(W) )\n\nModel A: PP_A = ⁵√(1/0.00008) = ⁵√12500 = 6.5975\nModel B: PP_B = ⁵√(1/0.00002) = ⁵√50000 ≈ 8.706\n\nLower perplexity means the better model.\n∴ Model A is the better model.\n\nClosing remark from class: unigram is not good enough anyway, since it takes no word history — a bigram model would be better for these types of questions."}
+  ]);
+
+  addTo("m2","m2n8",[
+   {id:"nb-m2-bow1", difficulty:"easy",
+    q:"Create the vocabulary and the Bag-of-Words vectors for:\nD₁: I love NLP\nD₂: I love machine learning",
+    answer:"Step 1 — vocabulary (order matters, fix it once and keep it):\n  [ I, love, NLP, machine, learning ]\n\nStep 2 — count each vocabulary word per document:\n  DOC | I | love | NLP | machine | learning\n  D₁  | 1 |  1   |  1  |    0    |    0\n  D₂  | 1 |  1   |  0  |    1    |    1\n\nD₁ = [1, 1, 1, 0, 0]\nD₂ = [1, 1, 0, 1, 1]"},
+   {id:"nb-m2-tfidf1", difficulty:"exam-level",
+    q:"Compute the TF-IDF vectors for:\nD₁: I love NLP\nD₂: I love machine learning\nD₃: NLP is useful",
+    answer:"I) TF = occurrences of the word in the doc / total words in the doc\n  D₁: I = 1/3, love = 1/3, NLP = 1/3\n  D₂: I = 1/4, love = 1/4, machine = 1/4, learning = 1/4\n  D₃: NLP = 1/3, is = 1/3, useful = 1/3\n\nII) IDF = log( total docs / docs containing the word ), using log base 10:\n  I        in 2 docs → log(3/2) = 0.1761\n  love     in 2 docs → log(3/2) = 0.1761\n  NLP      in 2 docs → log(3/2) = 0.1761\n  machine  in 1 doc  → log(3/1) = 0.4771\n  learning in 1 doc  → log(3/1) = 0.4771\n  is       in 1 doc  → log(3/1) = 0.4771\n  useful   in 1 doc  → log(3/1) = 0.4771\n\nIII) TF-IDF = TF × IDF\n  D₁: I = 1/3 × 0.1761 = 0.0587; love = 0.0587; NLP = 0.0587\n      TF-IDF_D₁ = [0.0587, 0.0587, 0.0587]\n  D₂: I = 1/4 × 0.1761 = 0.044; love = 0.044;\n      machine = 1/4 × 0.4771 = 0.1193; learning = 0.1193\n      TF-IDF_D₂ = [0.044, 0.044, 0.1193, 0.1193]\n  D₃: NLP = 1/3 × 0.1761 = 0.0587;\n      is = 1/3 × 0.4771 = 0.1590; useful = 0.1590\n      TF-IDF_D₃ = [0.0587, 0.1590, 0.1590]\n\nReading: words in every document (I, love, NLP) get LOW weight; document-specific words (machine, is, useful) get HIGH weight. That is the whole point of the IDF factor.\n\nEXAM INSTRUCTION from p.1: don't compute the whole table — do only the word(s) the question names."}
+  ]);
+
+  /* ---------- MODULE 3 ---------- */
+  addTo("m3","m3n1",[
+   {id:"nb-m3-hmm1", difficulty:"exam-level",
+    q:"Calculate the emission and transition probability matrices for the given tagged corpus (bigram HMM):\n<s> Book/V a/DET car/N </s>\n<s> Park/V the/DET car/N </s>\n<s> The/DET book/N is/V in/Prep the/DET car/N </s>\n<s> The/DET car/N is/V in/Prep a/DET park/N </s>",
+    answer:"Step 1 — word frequency table: Book:2, a:2, car:4, Park:2, the:4, is:2, in:2\nTag totals: V = 4, DET = 6, N = 6, Prep = 2\n\nStep 2 — EMISSION matrix P(word | tag) = c(tag, word)/c(tag):\n         V(4)   Det(6)  N(6)   Prep(2)\n  Book   1/4     0      1/6      0\n  a       0     2/6      0       0\n  car     0      0      4/6      0\n  park   1/4     0      1/6      0\n  is     2/4     0       0       0\n  in      0      0       0     2/2 = 1\n  the     0     4/6      0       0\n\nStep 3 — TRANSITION matrix P(tag | previous tag) = c(prev, tag)/c(prev):\n           N     V     DET   Prep   </s>\n  <s>(4)   0    2/4    2/4     0      0\n  N (6)    0    2/6     0      0     4/6\n  V (4)    0     0     2/4    2/4     0\n  Det(6)  4/6    0      0      0      0\n  Prep(2)  0     0    2/2=1    0      0\n\nCheck your work: every row of the transition matrix must sum to 1.\n\nAlways state the three things an HMM provides: (1) emission probabilities, (2) state transition probabilities, (3) the initial probability matrix (IPM)."},
+   {id:"nb-m3-hmm2", difficulty:"exam-level",
+    q:"Make an HMM table for the sentence 'Test passed' given IPM π = [NN 0.9, VB 0.1] and these four paths:\ni)   <s> →0.9 NN →0.5 NN →0.05 E   | NN→test 0.9, NN→passed 0.08\nii)  <s> →0.9 NN →0.9 VB →0.05 E   | NN→test 0.9, VB→passed 0.92\niii) <s> →0.1 VB →0.45 NN →0.05 E  | VB→test 0.1, NN→passed 0.08\niv)  <s> →0.1 VB →0.5 VB →0.05 E   | VB→test 0.1, VB→passed 0.92\nWhich tag sequence wins?",
+    answer:"Multiply, for each row: π(X₀) × P(O₀,X₀) × P(X₀,X₁) × P(O₁,X₁) × P(X₁,E)\n\n X₀  X₁  π(X₀) P(O₀,X₀) P(X₀,X₁) P(O₁,X₁) P(X₁)   Pr        Nor Pr\n NN  NN   0.9    0.9      0.05     0.08     0.05  0.000162  0.00475\n NN  VB   0.9    0.9      0.90     0.92     0.05  0.033534  0.98323\n VB  NN   0.1    0.1      0.45     0.08     0.05  0.000180  0.00528\n VB  VB   0.1    0.1      0.50     0.92     0.05  0.000230  0.00674\n\nΣPr = 0.034106\nNormalised Pr = Pr / ΣPr\n\n∴ The winning sequence is (NN, VB) with 98.32% of the probability mass:\n  o/p = [('test','NN'), ('passed','VB')]"}
+  ]);
+
+  addTo("m3","m3n2",[
+   {id:"nb-m3-vit1", difficulty:"exam-level",
+    q:"For the training corpus:\n<s> Martin Justin can watch Will <E>\n<s> Spot will watch Martin <E>\n<s> Will Justin spot Martin <E>\n<s> Martin will Pat spot <E>\nCalculate the most probable tag sequence using the Viterbi algorithm and the path probability for the test sentence 'Justin will spot Will'. (N=Noun, M=modal verb, V=verb)",
+    answer:"Step 1 — assign POS tags to the training corpus:\n  Martin/N Justin/N can/M watch/V Will/N\n  Spot/N   will/M   watch/V Martin/N\n  Will/M   Justin/N spot/V  Martin/N\n  Martin/N will/M   Pat/V   spot/N\nTag totals: N = 9, M = 4, V = 4\n\nStep 2 — EMISSION matrix P(word|tag):\n           N(9)   M(4)   V(4)\n  Martin   4/9     0      0\n  Justin   2/9     0      0\n  Will     1/9    3/4     0\n  Spot     2/9     0     1/4\n  can       0     1/4     0\n  watch     0      0     2/4\n  pat       0      0     1/4\n\nStep 3 — TRANSITION matrix P(tag|prev tag):\n         N     M     V    <E>\n  <s>   3/4   1/4    0     0\n  N     1/9   1/9   1/9   4/9\n  M     1/4    0    3/4    0\n  V      1     0     0     0\n\nStep 4 — state graph. Candidate tags per word:\n  <s>  Justin  will  spot  Will  <E>\n         N       N     V     N\n                 M     N     M\n  → 1 × 2 × 2 × 2 = 8 possible paths.\n\nAt each node compute (previous path prob × transition × emission) and keep only the greater-value incoming path — that pruning is what makes it Viterbi rather than enumerating all 8.\n\ne.g. start: P(N|<s>) × P(Justin|N) = 3/4 × 2/9 = 0.166\n\n∴ Best path: <s> Justin[N] will[M] spot[V] Will[N] <E>\n   Path probability = 0.000374\n\nThe MSE asks you to SHOW THE STATE GRAPH — draw the trellis and mark which arcs survive."},
+   {id:"nb-m3-vit2", difficulty:"moderate",
+    q:"Given the HMM transitions <s>→JJ 0.7, JJ→NN 0.8, NN→JJ 0.95, JJ→NN 0.8, NN→</s> 0.4 and emissions JJ→hot 0.4, NN→lead 0.55, JJ→cold 0.45, NN→feet 0.42, write the path probability for the observation sequence 'hot lead cold feet'.",
+    answer:"Path: S →0.7 JJ →0.8 NN →0.95 JJ →0.8 NN →0.4 </s>\nTags: hot/JJ  lead/NN  cold/JJ  feet/NN\n\nThe probability alternates transition × emission along the path:\n\nP = 0.7 × 0.4 × 0.8 × 0.55 × 0.95 × 0.45 × 0.8 × 0.42 × 0.4\n  (transition to JJ × emit hot × transition to NN × emit lead\n   × transition to JJ × emit cold × transition to NN × emit feet\n   × transition to </s>)\n\n= 0.7 × 0.4 = 0.28\n× 0.8 = 0.224 ; × 0.55 = 0.1232\n× 0.95 = 0.11704 ; × 0.45 = 0.052668\n× 0.8 = 0.0421344 ; × 0.42 = 0.01769645\n× 0.4 ≈ 0.00708\n\nP ≈ 7.08 × 10⁻³\n\n(The notebook left this unevaluated — the marked point is the alternating transition × emission structure, so write the factors in that order.)"}
+  ]);
+
+  addTo("m3","m3n4",[
+   {id:"nb-m3-pcfg1", difficulty:"exam-level",
+    q:"Compute the probability of the parse tree of the input string 'The mouse chased the cat.'\nPartial PCFG:\nS → NP VP 0.75 | NP → DT NN 0.25 | VP → VB NP 0.35\nNN → mouse 0.25 / cat 0.1 / dog 0.4\nVB → chased 0.3 / dodged 0.5\nDT → the 0.2 / a 0.35",
+    answer:"Build the tree and multiply every rule probability used in it:\n\n            S (0.75)\n          /        \\\n     NP (0.25)      VP (0.35)\n     /     \\        /      \\\n DT(0.2) NN(0.25) VB(0.3)  NP(0.25)\n   |        |       |      /      \\\n  The     mouse  chased  DT(0.2) NN(0.1)\n                           |        |\n                          the      cat\n\nP = 0.75 × 0.25 × 0.2 × 0.25 × 0.35 × 0.3 × 0.25 × 0.2 × 0.1\n\n  0.75 × 0.25 = 0.1875\n  × 0.2  = 0.0375\n  × 0.25 = 0.009375\n  × 0.35 = 0.00328125\n  × 0.3  = 0.000984375\n  × 0.25 = 0.000246094\n  × 0.2  = 0.0000492188\n  × 0.1  = 0.00000492188\n\nP ≈ 4.92 × 10⁻⁶\n\nNote: the class notes record 0.00000792 here, but multiplying the listed factors gives 0.00000492. Recompute rather than memorising, and always show the chain of factors so method marks are safe."},
+   {id:"nb-m3-pcfg2", difficulty:"moderate",
+    q:"Compute the probability of the parse tree for 'A pilot likes flying planes' where the rule probabilities along the chosen tree are 1, 0.3, 0.3, 0.1, 0.1, 0.4, 0.5 and 0.34. Also explain what makes this sentence interesting.",
+    answer:"P = 1 × 0.3 × 0.3 × 0.1 × 0.1 × 0.4 × 0.5 × 0.34\n  = 0.00000612  (as recorded in the class notes)\n\nWhy this sentence is set: 'flying planes' is structurally ambiguous.\n  Reading 1 — NP: 'flying planes' = the activity of flying planes (JJ + NNS, or a gerund NP)\n  Reading 2 — VP: 'planes that are flying'\n\nBoth readings are grammatical, so a plain CFG cannot choose. A PCFG resolves it by computing the probability product for EACH tree and picking the higher one. That disambiguation-by-probability is the entire reason PCFG exists — say this in the answer.\n\nPCFG is MSE Q1(d), worth 2 marks: definition + one short product is enough, no chart needed."}
+  ]);
+
+  addTo("m3","m3n5",[
+   {id:"nb-m3-lmd1", difficulty:"exam-level",
+    q:"Perform the left-most derivation and draw the parse tree for the string \"The Panda eats leaves\".\nS → NP VP ; NP → DT NN ; VP → VB NN ; DT → a/the ; NN → man/woman/Panda/lion/leaves ; VB → eats/shoots/leaves",
+    answer:"Step 1 — label every grammar rule (marks are given for this):\n  S  → NP VP                                        (1)\n  NP → DT NN                                        (2)\n  VP → VB NN                                        (3)\n  DT → a (4) / the (5)\n  NN → man (6) / woman (7) / Panda (8) / lion (9) / leaves (10)\n  VB → eats (11) / shoots (12) / leaves (13)\n\nStep 2 — left-most derivation (always expand the LEFT-most non-terminal):\n  S → NP VP                     (1)\n    → DT NN VP                  (2)\n    → The NN VP                 (5)\n    → The Panda VP              (8)\n    → The Panda VB NN           (3)\n    → The Panda eats NN         (11)\n    → The Panda eats leaves     (10)\n\nStep 3 — parse tree:\n            S\n          /   \\\n        NP     VP\n       /  \\    /  \\\n     DT   NN  VB   NN\n      |    |   |    |\n     The Panda eats leaves\n\nNote 'leaves' is ambiguous in this grammar (NN rule 10 and VB rule 13). Here it is used as NN via rule 10; a second parse exists where 'eats' is NN and 'leaves' is VB — worth mentioning for the extra mark.\n\nThis is MSE Q3(d), 5 marks — marked 'in MSE' in the notes."},
+   {id:"nb-m3-lmd2", difficulty:"exam-level",
+    q:"Perform the left-most derivation and draw the parse tree for \"The teacher gives a book to the student\".\nS → NP VP ; NP → DT NN ; VP → VB NP PP ; PP → Prep NP ; DT → The/a ; NN → teacher/student/book ; VB → gives ; Prep → to",
+    answer:"Step 1 — label the rules:\n  S → NP VP (1) | NP → DT NN (2) | VP → VB NP PP (3) | PP → Prep NP (4)\n  DT → The (5) / a (6) | NN → teacher (7) / student (8) / book (9)\n  VB → gives (10) | Prep → to (11)\n\nStep 2 — left-most derivation:\n  S → NP VP                                          (1)\n    → DT NN VP                                       (2)\n    → The NN VP                                      (5)\n    → The teacher VP                                 (7)\n    → The teacher VB NP PP                           (3)\n    → The teacher gives NP PP                        (10)\n    → The teacher gives DT NN PP                     (2)\n    → The teacher gives a NN PP                      (6)\n    → The teacher gives a book PP                    (9)\n    → The teacher gives a book Prep NP               (4)\n    → The teacher gives a book to NP                 (11)\n    → The teacher gives a book to DT NN              (2)\n    → The teacher gives a book to the NN             (5)\n    → The teacher gives a book to the student        (8)\n\nStep 3 — parse tree:\n              S\n            /   \\\n          NP     VP\n         /  \\   / |  \\\n       DT   NN VB NP   PP\n        |    |  |  /\\   /  \\\n      The teacher gives   Prep NP\n                  DT NN    |   /  \\\n                   a book  to  DT  NN\n                                |   |\n                              the student"},
+   {id:"nb-m3-pred1", difficulty:"moderate",
+    q:"Trace a predictive parser on 'The dog chases a cat'.\nS → NP VP ; NP → Det N ; VP → V NP ; Det → the/a ; N → cat/dog ; V → chases/sees",
+    answer:"Stack (top→bottom) | input remaining        | action\n S $                | the dog chases a cat $ | table[S,'the'] → S → NP VP\n NP VP $            | the dog chases a cat $ | pop S, push NP VP\n Det N VP $         | the dog chases a cat $ | table[NP,'the'] → NP → Det N; pop NP, push N Det\n N VP $             | dog chases a cat $     | table[Det,'the'] → Det → the; terminal → MATCH (1st)\n VP $               | chases a cat $         | table[N,'dog'] → N → dog; MATCH (2nd)\n V NP $             | chases a cat $         | table[VP,'chases'] → VP → V NP; push NP V\n NP $               | a cat $                | table[V,'chases'] → V → chases; MATCH (3rd)\n Det N $            | a cat $                | table[NP,'a'] → NP → Det N; push N Det\n N $                | cat $                  | table[Det,'a'] → Det → a; MATCH (4th)\n $                  | $                      | N → cat; MATCH (5th) → stack empty ⇒ ACCEPTED\n\nKey property: a predictive (LL(1)) parser is top-down and table-driven, and NEVER backtracks — the entry [non-terminal, lookahead token] picks the production deterministically.\n\n(The class notes stop after the sixth row; the rest continues by the same rule.)"}
+  ]);
+
+  addTo("m3","m3n6",[
+   {id:"nb-m3-ear1", difficulty:"exam-level",
+    q:"Trace the Earley parser on 'Dog chases a cat'.\nS → NP VP ; NP → Det N / N ; VP → V NP ; Det → 'the'/'a' ; N → 'cat'/'dog' ; V → 'chases'/'sees'",
+    answer:"Operation      | Production rule  | Completed status\n initialization | S → . NP VP     | 0\n predict        | NP → . Det N    | 0\n                | NP → . N        | 0\n scan: dog      | NP → N .        | 1  (1st word scanned)\n complete       | S → NP . VP     | 1\n predict        | VP → . V NP     | 1\n scan: chases   | VP → V . NP     | 2  (2nd word scanned)\n predict        | NP → . Det N    | 2\n                | NP → . N        | 2\n scan: a        | NP → Det . N    | 3  (3rd word scanned)\n scan: cat      | NP → Det N .    | 4  (4th word scanned)\n complete       | S → NP VP .     | 4\n\nThe final state S → NP VP . with the dot at the end and status 4 (all four words consumed) means the string is ACCEPTED.\n\nThe three operations to name in theory answers:\n  PREDICT  — add rules for a non-terminal sitting just after the dot\n  SCAN     — advance the dot over a terminal that matches the next input word\n  COMPLETE — when a rule's dot reaches the end, advance the dot in the rule that was waiting for it\n\nNote: the class notes label the third scan 'scan: the', but the input word there is 'a' — corrected above."}
+  ]);
+
+  addTo("m3","m3n8",[
+   {id:"nb-m3-cky1", difficulty:"exam-level",
+    q:"Construct the CYK table and the parse tree for \"The flight includes a meal\".\nS → NP VP ; NP → Det N ; VP → V NP ; V → includes ; Det → The ; Det → a ; N → meal ; N → flight",
+    answer:"CYK fills a chart bottom-up; cell (i,j) holds every non-terminal that can generate words i..j.\n\n            The     flight   includes    a      meal\n  The       Det      NP        -         -       S\n  flight             N         -         -       -\n  includes                     V         -       VP\n  a                                     Det      NP\n  meal                                            N\n\nHow the cells fill:\n  Diagonal (length-1 spans): The→Det, flight→N, includes→V, a→Det, meal→N\n  Span 'The flight'   : Det + N  → NP\n  Span 'a meal'       : Det + N  → NP\n  Span 'includes a meal': V + NP → VP\n  Span whole sentence : NP + VP  → S   ← root reached, string ACCEPTED\n\nParse tree:\n            S\n          /   \\\n        NP     VP\n       /  \\   /   \\\n     Det   N V     NP\n      |    | |    /  \\\n     The flight  Det   N\n         includes |    |\n                  a   meal\n\nPrerequisite to state: CYK requires the grammar in Chomsky Normal Form (A → BC or A → a). This grammar already is."},
+   {id:"nb-m3-cky2", difficulty:"moderate",
+    q:"Construct the CYK table and parse tree for \"A student reads a book\".\nS → NP VP ; NP → Det N ; VP → V NP ; Det → a ; N → student/book ; V → reads",
+    answer:"             A     student   reads     a      book\n  A         Det      NP        -        -       S\n  student             N        -        -       -\n  reads                        V        -       VP\n  a                                    Det      NP\n  book                                           N\n\nFill order:\n  Diagonal: A→Det, student→N, reads→V, a→Det, book→N\n  'A student'      : Det + N → NP\n  'a book'         : Det + N → NP\n  'reads a book'   : V + NP  → VP\n  whole sentence   : NP + VP → S   ⇒ ACCEPTED\n\nParse tree:\n            S\n          /   \\\n        NP     VP\n       /  \\   /   \\\n     Det   N V     NP\n      |    | |    /  \\\n      A student  Det   N\n           reads  |    |\n                  a   book"}
+  ]);
+})();
+
 function defaultProgress(){
   return { syllabus:{m1:{},m2:{},m3:{}}, theory:{m1:{},m2:{},m3:{}},
     flashcards:{m1:{},m2:{},m3:{}}, numericals:{m1:{},m2:{},m3:{}},
@@ -1834,7 +2694,8 @@ function loadProgress(){
 function saveProgress(){ localStorage.setItem(STORE_KEY, JSON.stringify(PROGRESS)); }
 
 /* ================= ROUTER STATE ================= */
-let ROUTE = { view:"dashboard", sub:{m1:"syllabus",m2:"syllabus",m3:"syllabus"} };
+let ROUTE = { view:"dashboard", sub:{m1:"syllabus",m2:"syllabus",m3:"syllabus"}, notesSub:"exam" };
+let NOTE_SEARCH = "";
 let FLASH_IDX = { m1:0, m2:0, m3:0 };
 let NUM_FILTER = { m1:"all", m2:"all", m3:"all" };
 let QUIZ_STATE = {};
@@ -1874,6 +2735,7 @@ function render(){
   app.innerHTML = "";
   if(ROUTE.view==="dashboard") app.appendChild(renderDashboard());
   else if(ROUTE.view==="m1"||ROUTE.view==="m2"||ROUTE.view==="m3") app.appendChild(renderModule(ROUTE.view));
+  else if(ROUTE.view==="notes") app.appendChild(renderNotes());
   else if(ROUTE.view==="mock") app.appendChild(renderMock());
   else if(ROUTE.view==="fullmarks") app.appendChild(renderFullMarks());
   else if(ROUTE.view==="coverage") app.appendChild(renderCoverage());
@@ -2218,10 +3080,11 @@ function renderPracticeQ(m,p){
   const diffClass = {easy:"easy",basic:"medium-diff",moderate:"medium-diff",difficult:"hard","exam-level":"exam-level",challenge:"challenge"}[p.difficulty]||"medium-diff";
   head.appendChild(el("span",{class:"badge-row"},[
     el("span",{class:"pill "+diffClass},[p.difficulty]),
+    p.src==="notes" ? el("span",{class:"pill notes"},["class notes"]) : el("span",{}),
     status? el("span",{class:"small-muted"},["status: "+status]) : el("span",{})
   ]));
   box.appendChild(head);
-  box.appendChild(el("div",{style:"margin:6px 0"},[p.q]));
+  box.appendChild(el("div",{style:"margin:6px 0;white-space:pre-wrap"},[p.q]));
   const solBtn = el("button",{class:"small",onclick:()=>{sol.classList.toggle("show"); solBtn.textContent = sol.classList.contains("show")?"Hide Solution":"Show Solution";}},["Show Solution"]);
   box.appendChild(solBtn);
   const sol = el("div",{class:"solution",html:nl2br(p.answer)});
@@ -2364,6 +3227,131 @@ function renderRevision(m){
     wrap.appendChild(card);
   });
   return wrap;
+}
+
+/* ================= CLASS NOTES VIEW ================= */
+const NOTE_TABS = [["exam","Exam Pattern"],["m1","Module 1"],["m2","Module 2"],["m3","Module 3"]];
+const NOTE_TAB_TITLES = {
+  exam:"Exam Pattern &amp; Paper Structure",
+  m1:"Module 1 — Introduction to NLP",
+  m2:"Module 2 — Text Processing &amp; Word-Level Analysis",
+  m3:"Module 3 — Syntax Analysis &amp; Sequence Modelling"
+};
+
+function renderNotes(){
+  const wrap = el("div",{});
+  wrap.appendChild(el("h1",{},["Class Notes"]));
+  wrap.appendChild(el("p",{class:"small-muted"},[
+    "Transcribed from the handwritten notebook (34 pages, 13/7/26 – 1/9/26). Page references point back to the scanned PDF. Anything the professor starred, boxed or wrote in the margin is called out in a highlighted box, and places where the notebook and the standard definition disagree are flagged in orange so you don't revise an error."
+  ]));
+
+  const subtabs = el("div",{class:"subtabs"});
+  NOTE_TABS.forEach(([key,label])=>{
+    subtabs.appendChild(el("button",{
+      class: ROUTE.notesSub===key ? "active" : "",
+      onclick:()=>{ ROUTE.notesSub=key; render(); }
+    },[label]));
+  });
+  wrap.appendChild(subtabs);
+
+  const key = ROUTE.notesSub || "exam";
+  wrap.appendChild(el("h2",{html:NOTE_TAB_TITLES[key]}));
+
+  const toolbar = el("div",{class:"toolbar"});
+  const search = el("input",{type:"text",placeholder:"Filter sections…",value:NOTE_SEARCH});
+  search.addEventListener("input",()=>{
+    NOTE_SEARCH = search.value;
+    const q = NOTE_SEARCH.trim().toLowerCase();
+    wrap.querySelectorAll(".nb-sec").forEach(sec=>{
+      sec.hidden = q ? sec.textContent.toLowerCase().indexOf(q)===-1 : false;
+    });
+  });
+  toolbar.appendChild(search);
+  toolbar.appendChild(el("button",{class:"small",onclick:()=>{
+    wrap.querySelectorAll(".nb-ex .nb-a").forEach(a=>a.classList.add("show"));
+    wrap.querySelectorAll(".nb-ex .nb-toggle").forEach(b=>b.textContent="Hide answer");
+  }},["Expand all answers"]));
+  toolbar.appendChild(el("button",{class:"small",onclick:()=>{
+    wrap.querySelectorAll(".nb-ex .nb-a").forEach(a=>a.classList.remove("show"));
+    wrap.querySelectorAll(".nb-ex .nb-toggle").forEach(b=>b.textContent="Show answer");
+  }},["Collapse all"]));
+  wrap.appendChild(toolbar);
+
+  const sections = (DATA.notes && DATA.notes[key]) || [];
+  if(!sections.length){
+    wrap.appendChild(el("p",{class:"small-muted"},["No notes transcribed for this section yet."]));
+    return wrap;
+  }
+  sections.forEach(sec=>wrap.appendChild(renderNoteSection(sec)));
+  return wrap;
+}
+
+function renderNoteSection(sec){
+  const card = el("div",{class:"card nb-sec"});
+  const head = el("div",{class:"nb-head"});
+  head.appendChild(el("h3",{html:sec.heading}));
+  if(sec.page) head.appendChild(el("span",{class:"nb-page"},[sec.page]));
+  card.appendChild(head);
+  (sec.blocks||[]).forEach(b=>{
+    const node = renderNoteBlock(b);
+    if(node) card.appendChild(node);
+  });
+  return card;
+}
+
+function renderNoteBlock(b){
+  switch(b.t){
+    case "p":
+      return el("p",{class:"nb-p",html:b.v});
+    case "list": {
+      const ul = el("ul",{class:"nb-list"});
+      b.v.forEach(x=>ul.appendChild(el("li",{html:x})));
+      return ul;
+    }
+    case "num": {
+      const ol = el("ol",{class:"nb-list"});
+      b.v.forEach(x=>ol.appendChild(el("li",{html:x})));
+      return ol;
+    }
+    case "formula":
+      return el("pre",{class:"nb-formula"},[b.v]);
+    case "flow":
+      return el("pre",{class:"nb-flow"},[b.v]);
+    case "note":
+      return el("div",{class:"nb-note",html:"<b>Note · </b>"+b.v});
+    case "warn":
+      return el("div",{class:"nb-warn",html:"<b>⚠ </b>"+b.v});
+    case "table": {
+      const scroller = el("div",{class:"nb-scroll"});
+      const t = el("table",{class:"nb-t"});
+      if(b.head){
+        const tr = el("tr",{});
+        b.head.forEach(h=>tr.appendChild(el("th",{html:h})));
+        t.appendChild(tr);
+      }
+      (b.rows||[]).forEach(row=>{
+        const tr = el("tr",{});
+        row.forEach(c=>tr.appendChild(el("td",{html:c})));
+        t.appendChild(tr);
+      });
+      scroller.appendChild(t);
+      return scroller;
+    }
+    case "ex": {
+      const box = el("div",{class:"nb-ex"});
+      box.appendChild(el("div",{class:"nb-q",html:"<span class='nb-qlabel'>Q</span> "+b.q}));
+      const ans = el("div",{class:"nb-a",html:b.a});
+      const btn = el("button",{class:"small nb-toggle",onclick:()=>{
+        ans.classList.toggle("show");
+        btn.textContent = ans.classList.contains("show") ? "Hide answer" : "Show answer";
+      }},["Show answer"]);
+      box.appendChild(btn);
+      box.appendChild(ans);
+      return box;
+    }
+    default:
+      return null;
+  }
 }
 
 /* ================= FINAL MOCK ================= */
